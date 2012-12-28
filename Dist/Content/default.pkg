@@ -1,0 +1,166 @@
+{
+
+	"resources" : [
+		/////////////////////////////////////////////////////////////// 
+		// Entities.
+		{
+			"name"		:		"PlayerEntity",
+			"type"		:		"ScnEntity",
+
+			"components" : [
+				{
+					"type"					: "GaPlayerComponent"
+				},
+
+				{
+					"type"					: "GaPawnComponent"
+				},
+
+				{
+					"type"					: "GaPlayerSoundComponent"
+				},
+
+				{
+					"type"					: "ScnViewComponent",
+					"x"						: 0.0,
+					"y"						: 0.0,
+					"width"					: 1.0,
+					"height"				: 1.0,
+					"near"					: 0.1,
+					"far"					: 1000.0,
+					"hfov"					: 0.75,
+					"vfov"					: 0.0
+				}
+			]
+		},
+
+		{
+			"name"		:		"EnemyEntity",
+			"type"		:		"ScnEntity",
+
+			"components" : [
+				{
+					"type"					: "GaEnemyComponent"
+				},
+
+				{
+					"type"					: "GaPawnComponent"
+				}
+			]
+		},
+
+		{
+			"name"		:		"LevelEntity",
+			"type"		:		"ScnEntity",
+
+			"components" : [
+				{
+					"type"					: "ScnCanvasComponent",
+					"noofvertices" 			: 8192
+				},
+
+				{
+					"type"					: "GaWorldInfoComponent",
+					"width"					: 256,
+					"height"				: 256,
+					"depth"					: 16,
+					"scale"					: 0.125,
+					"damping"				: 0.08,
+					"accumulatormultiplier" : 2.48
+				},
+
+				{
+					"type"					: "ScnMaterialComponent",
+					"material"				: "$(ScnMaterial:materials.default)",
+					"permutation"			: "2d"
+				},
+
+				{
+					"type"					: "ScnMaterialComponent",
+					"material"				: "$(ScnMaterial:materials.air)",
+					"permutation"			: "3d"
+				},
+
+				{
+					"type"					: "ScnMaterialComponent",
+					"material"				: "$(ScnMaterial:materials.airpreview)",
+					"permutation"			: "2d"
+				},
+
+				{
+					"type"					: "ScnFontComponent",
+					"font"					: "$(ScnFont:fonts.default)",
+					"material"				: "$(ScnMaterial:materials.font)"
+				},
+
+				{
+					"type"					: "GaWorldBSPComponent",
+					"editor"				: false,
+					"level"					: 1,
+					"player"				: "$(ScnEntity:this.PlayerEntity)"
+				},
+
+				{
+					"type"					: "GaWorldPressureComponent"
+				}
+			]
+		},
+
+		{
+			"name"		:		"EditorEntity",
+			"type"		:		"ScnEntity",
+
+			"components" : [
+				{
+					"type"					: "ScnCanvasComponent",
+					"noofvertices" 			: 8192
+				},
+
+				{
+					"type"					: "GaWorldInfoComponent",
+					"width"					: 256,
+					"height"				: 256,
+					"depth"					: 16,
+					"scale"					: 0.125,
+					"damping"				: 0.08,
+					"accumulatormultiplier" : 2.48
+				},
+
+				{
+					"type"					: "ScnMaterialComponent",
+					"material"				: "$(ScnMaterial:materials.default)",
+					"permutation"			: "2d"
+				},
+
+				{
+					"type"					: "ScnMaterialComponent",
+					"material"				: "$(ScnMaterial:materials.air)",
+					"permutation"			: "3d"
+				},
+
+				{
+					"type"					: "ScnMaterialComponent",
+					"material"				: "$(ScnMaterial:materials.airpreview)",
+					"permutation"			: "2d"
+				},
+
+				{
+					"type"					: "ScnFontComponent",
+					"font"					: "$(ScnFont:fonts.default)",
+					"material"				: "$(ScnMaterial:materials.font)"
+				},
+
+				{
+					"type"					: "GaWorldBSPComponent",
+					"editor"				: true,
+					"level"					: 1,
+					"player"				: "$(ScnEntity:this.PlayerEntity)"
+				},
+
+				{
+					"type"					: "GaWorldPressureComponent"
+				}
+			]
+		}
+	]
+}
