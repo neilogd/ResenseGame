@@ -31,7 +31,7 @@ BCREFLECTION_DERIVED_END();
 // initialise
 void GaPlayerComponent::initialise( const Json::Value& Object )
 {
-	Super::initialise( Object );
+	Super::initialise();
 	
 	Yaw_ = 0.0f;
 	Pitch_ = 0.0f;

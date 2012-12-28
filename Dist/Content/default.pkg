@@ -77,13 +77,35 @@
 
 				{
 					"type"					: "ScnMaterialComponent",
-					"material"				: "$(ScnMaterial:materials.air)",
+					"material"				: "$(ScnMaterial:materials.default)",
+					"permutation"			: "2d"
+				},
+
+				{
+					"type"					: "ScnMaterialComponent",
+					"name"					: "ScnMaterialComponent_air_0",
+					"material"				: "$(ScnMaterial:materials.air_0)",
 					"permutation"			: "3d"
 				},
 
 				{
 					"type"					: "ScnMaterialComponent",
-					"material"				: "$(ScnMaterial:materials.airpreview)",
+					"name"					: "ScnMaterialComponent_air_1",
+					"material"				: "$(ScnMaterial:materials.air_1)",
+					"permutation"			: "3d"
+				},
+
+				{
+					"type"					: "ScnMaterialComponent",
+					"name"					: "ScnMaterialComponent_airpreview_0",
+					"material"				: "$(ScnMaterial:materials.airpreview_0)",
+					"permutation"			: "2d"
+				},
+
+				{
+					"type"					: "ScnMaterialComponent",
+					"name"					: "ScnMaterialComponent_airpreview_1",
+					"material"				: "$(ScnMaterial:materials.airpreview_1)",
 					"permutation"			: "2d"
 				},
 
@@ -134,13 +156,35 @@
 
 				{
 					"type"					: "ScnMaterialComponent",
-					"material"				: "$(ScnMaterial:materials.air)",
+					"material"				: "$(ScnMaterial:materials.default)",
+					"permutation"			: "2d"
+				},
+
+				{
+					"type"					: "ScnMaterialComponent",
+					"name"					: "ScnMaterialComponent_air_0",
+					"material"				: "$(ScnMaterial:materials.air_0)",
 					"permutation"			: "3d"
 				},
 
 				{
 					"type"					: "ScnMaterialComponent",
-					"material"				: "$(ScnMaterial:materials.airpreview)",
+					"name"					: "ScnMaterialComponent_air_1",
+					"material"				: "$(ScnMaterial:materials.air_1)",
+					"permutation"			: "3d"
+				},
+
+				{
+					"type"					: "ScnMaterialComponent",
+					"name"					: "ScnMaterialComponent_airpreview_0",
+					"material"				: "$(ScnMaterial:materials.airpreview_0)",
+					"permutation"			: "2d"
+				},
+
+				{
+					"type"					: "ScnMaterialComponent",
+					"name"					: "ScnMaterialComponent_airpreview_1",
+					"material"				: "$(ScnMaterial:materials.airpreview_1)",
 					"permutation"			: "2d"
 				},
 

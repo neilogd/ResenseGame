@@ -52,7 +52,7 @@ static void releasePortAudio()
 // initialise
 void GaPlayerSoundComponent::initialise( const Json::Value& Object )
 {
-	Super::initialise( Object );
+	Super::initialise();
 
 	SampleRate_ = 22050;
 	BufferSize_ = 1024 * 2;

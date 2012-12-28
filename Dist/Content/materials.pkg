@@ -27,14 +27,14 @@
 
 		{
 			"type"			: "ScnMaterial",
-			"name"			: "air",
+			"name"			: "air_0",
 
 			// Shader
 			"shader"		: "$(ScnShader:shaders.air)",
 
 			// Textures
 			"textures"		: {
-				"aDiffuseTex"	: "$(ScnTexture:textures.default)"
+				"aDiffuseTex"	: "$(ScnTexture:textures.worldtexture3d_0)"
 			},
 
 			// State
@@ -52,14 +52,14 @@
 
 		{
 			"type"			: "ScnMaterial",
-			"name"			: "airsolid",
+			"name"			: "airsolid_0",
 
 			// Shader
 			"shader"		: "$(ScnShader:shaders.air)",
 
 			// Textures
 			"textures"		: {
-				"aDiffuseTex"	: "$(ScnTexture:textures.default)"
+				"aDiffuseTex"	: "$(ScnTexture:textures.worldtexture3d_0)"
 			},
 
 			// State
@@ -77,16 +77,93 @@
 
 		{
 			"type"			: "ScnMaterial",
-			"name"			: "airpreview",
+			"name"			: "airpreview_0",
 
 			// Shader
 			"shader"		: "$(ScnShader:shaders.airpreview)",
 
 			// Textures
 			"textures"		: {
-				"aDiffuseTex"	: "$(ScnTexture:textures.default)",
-				"aFloorTex"		: "$(ScnTexture:textures.default)",
-				"aWallTex"		: "$(ScnTexture:textures.default)"
+				"aDiffuseTex"	: "$(ScnTexture:textures.worldtexture3d_0)",
+				"aFloorTex"		: "$(ScnTexture:textures.worldtexture2d_0)",
+				"aWallTex"		: "$(ScnTexture:textures.worldtexture1d_0)"
+			},
+
+			// State
+			"state"			: {
+				"depth_write_enable" 		: 0,
+				"depth_test_enable" 		: 0,
+				"depth_test_compare" 		: "lessequal",
+				"depth_bias" 				: 0,
+				"alpha_test_enable" 		: 0,
+				"alpha_test_compare" 		: "never",
+				"alpha_test_threshold" 		: 0,
+				"blend_mode" 				: "add"
+			}
+		},
+
+		{
+			"type"			: "ScnMaterial",
+			"name"			: "air_1",
+
+			// Shader
+			"shader"		: "$(ScnShader:shaders.air)",
+
+			// Textures
+			"textures"		: {
+				"aDiffuseTex"	: "$(ScnTexture:textures.worldtexture3d_1)"
+			},
+
+			// State
+			"state"			: {
+				"depth_write_enable" 		: 0,
+				"depth_test_enable" 		: 1,
+				"depth_test_compare" 		: "lessequal",
+				"depth_bias" 				: 0,
+				"alpha_test_enable" 		: 0,
+				"alpha_test_compare" 		: "never",
+				"alpha_test_threshold" 		: 0,
+				"blend_mode" 				: "add"
+			}
+		},
+
+		{
+			"type"			: "ScnMaterial",
+			"name"			: "airsolid_1",
+
+			// Shader
+			"shader"		: "$(ScnShader:shaders.air)",
+
+			// Textures
+			"textures"		: {
+				"aDiffuseTex"	: "$(ScnTexture:textures.worldtexture3d_1)"
+			},
+
+			// State
+			"state"			: {
+				"depth_write_enable" 		: 1,
+				"depth_test_enable" 		: 1,
+				"depth_test_compare" 		: "lessequal",
+				"depth_bias" 				: 0,
+				"alpha_test_enable" 		: 0,
+				"alpha_test_compare" 		: "never",
+				"alpha_test_threshold" 		: 0,
+				"blend_mode" 				: "none"
+			}
+		},
+
+		{
+			"type"			: "ScnMaterial",
+			"name"			: "airpreview_1",
+
+			// Shader
+			"shader"		: "$(ScnShader:shaders.airpreview)",
+
+			// Textures
+			"textures"		: {
+				"aDiffuseTex"	: "$(ScnTexture:textures.worldtexture3d_1)",
+				"aFloorTex"		: "$(ScnTexture:textures.worldtexture2d_1)",
+				"aWallTex"		: "$(ScnTexture:textures.worldtexture1d_1)"
 			},
 
 			// State
@@ -111,9 +188,7 @@
 
 			// Textures
 			"textures"		: {
-				"aDiffuseTex"	: "$(ScnTexture:textures.default)",
-				"aFloorTex"		: "$(ScnTexture:textures.default)",
-				"aWallTex"		: "$(ScnTexture:textures.default)"
+				"aDiffuseTex"	: "$(ScnTexture:textures.default)"
 			},
 			
 			// State

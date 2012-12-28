@@ -364,43 +364,20 @@ void GaWorldPressureComponent::onAttach( ScnEntityWeakRef Parent )
 	create__onAttach();
 
 	// Grab material
-	ScnMaterialRef WorldMaterial;
-	ScnMaterialRef PreviewMaterial;
-	if( CsCore::pImpl()->requestResource( "materials", "air", WorldMaterial ) &&
-		CsCore::pImpl()->requestResource( "materials", "airpreview", PreviewMaterial ) )
+	for( BcU32 Idx = 0; Idx < 2; ++Idx )
 	{
-		BcU32 TextureParam;
-		for( BcU32 Idx = 0; Idx < 2; ++Idx )
-		{
-			TDynamicMaterial& DynamicMaterial( DynamicMaterials_[ Idx ] );
-			
-			// Create textures.
-			CsCore::pImpl()->createResource( BcName::INVALID, getPackage(), DynamicMaterial.WorldTexture1D_, Depth_, 1, rsTF_RGBA8 );
-			CsCore::pImpl()->createResource( BcName::INVALID, getPackage(), DynamicMaterial.WorldTexture2D_, Width_, Height_, 1, rsTF_RGBA8 );
-			CsCore::pImpl()->createResource( BcName::INVALID, getPackage(), DynamicMaterial.WorldTexture3D_, Width_, Height_, Depth_, 1, rsTF_RGBA8 );
-			
-			// Create material component, and attach textures.
-			if( CsCore::pImpl()->createResource( BcName::INVALID, getPackage(), DynamicMaterial.WorldMaterial_, WorldMaterial, scnSPF_3D ) )
-			{
-				TextureParam = DynamicMaterial.WorldMaterial_->findParameter( "aFloorTex" );
-				DynamicMaterial.WorldMaterial_->setTexture( TextureParam, DynamicMaterial.WorldTexture1D_ );
-				TextureParam = DynamicMaterial.WorldMaterial_->findParameter( "aWallTex" );
-				DynamicMaterial.WorldMaterial_->setTexture( TextureParam, DynamicMaterial.WorldTexture2D_ );
-				TextureParam = DynamicMaterial.WorldMaterial_->findParameter( "aDiffuseTex" );
-				DynamicMaterial.WorldMaterial_->setTexture( TextureParam, DynamicMaterial.WorldTexture3D_ );
-			}
+		TDynamicMaterial& DynamicMaterial( DynamicMaterials_[ Idx ] );
 
-			// Create material component, and attach textures.
-			if( CsCore::pImpl()->createResource( BcName::INVALID, getPackage(), DynamicMaterial.PreviewMaterial_, PreviewMaterial, scnSPF_2D ) )
-			{
-				TextureParam = DynamicMaterial.PreviewMaterial_->findParameter( "aFloorTex" );
-				DynamicMaterial.PreviewMaterial_->setTexture( TextureParam, DynamicMaterial.WorldTexture1D_ );
-				TextureParam = DynamicMaterial.PreviewMaterial_->findParameter( "aWallTex" );
-				DynamicMaterial.PreviewMaterial_->setTexture( TextureParam, DynamicMaterial.WorldTexture2D_ );
-				TextureParam = DynamicMaterial.PreviewMaterial_->findParameter( "aDiffuseTex" );
-				DynamicMaterial.PreviewMaterial_->setTexture( TextureParam, DynamicMaterial.WorldTexture3D_ );
-			}
-		}
+		// Grab components.
+		DynamicMaterial.WorldMaterial_ = Parent->getComponentByType< ScnMaterialComponent >( BcName( "ScnMaterialComponent_air", Idx ) );
+		DynamicMaterial.PreviewMaterial_ = Parent->getComponentByType< ScnMaterialComponent >( BcName( "ScnMaterialComponent_airpreview", Idx ) );
+
+		BcU32 Texture1DParam = DynamicMaterial.WorldMaterial_->findParameter( "aWallTex" );
+		BcU32 Texture2DParam = DynamicMaterial.WorldMaterial_->findParameter( "aFloorTex" );
+		BcU32 Texture3DParam = DynamicMaterial.WorldMaterial_->findParameter( "aDiffuseTex" );
+		DynamicMaterial.WorldTexture1D_ = DynamicMaterial.WorldMaterial_->getTexture( Texture1DParam );
+		DynamicMaterial.WorldTexture2D_ = DynamicMaterial.WorldMaterial_->getTexture( Texture2DParam );
+		DynamicMaterial.WorldTexture3D_ = DynamicMaterial.WorldMaterial_->getTexture( Texture3DParam );
 	}
 
 	// Attach materials.
@@ -577,20 +554,23 @@ void GaWorldPressureComponent::updateTexture()
 	BcScopedLogTimer ScopedTimer("Update Texture");
 
 	const BcF32 Brightness = 2.5f;
-	// Update texture.
 	TDynamicMaterial& DynamicMaterial( DynamicMaterials_[ CurrMaterial_ ] );
-	RsTexture* pTexture = DynamicMaterial.WorldTexture3D_->getTexture();
-	BcU32* pTexelData = reinterpret_cast< BcU32* >( pTexture->lockTexture() );
-	GaWorldPressureSample* pInputBuffer = pBuffers_[ CurrBuffer_ ];
-
-	BcU32 NoofTexels = Width_ * Height_ * Depth_;
-	for( BcU32 Idx = 0; Idx < NoofTexels; ++Idx )
+	if( DynamicMaterial.WorldTexture3D_->isReady() )
 	{
-		BcU32 Value = static_cast< BcU32 >( BcClamp( ( (*pInputBuffer++).Value_ ) * Brightness, 0.0f, 1.0f ) * 255.0f );
-		BcU32 Colour = Value << 24 | 0x00ffffff;
-		*pTexelData++ = Colour; 
+		// Update texture.
+		RsTexture* pTexture = DynamicMaterial.WorldTexture3D_->getTexture();
+		BcU32* pTexelData = reinterpret_cast< BcU32* >( pTexture->lockTexture() );
+		GaWorldPressureSample* pInputBuffer = pBuffers_[ CurrBuffer_ ];
+
+		BcU32 NoofTexels = Width_ * Height_ * Depth_;
+		for( BcU32 Idx = 0; Idx < NoofTexels; ++Idx )
+		{
+			BcU32 Value = static_cast< BcU32 >( BcClamp( ( (*pInputBuffer++).Value_ ) * Brightness, 0.0f, 1.0f ) * 255.0f );
+			BcU32 Colour = Value << 24 | 0x00ffffff;
+			*pTexelData++ = Colour; 
+		}
+		pTexture->unlockTexture();
 	}
-	pTexture->unlockTexture();
 }
 
 //////////////////////////////////////////////////////////////////////////

@@ -5,6 +5,61 @@
 			"name"			: "default",
 
 			"source"		: "EngineContent/TextureSource/default.png"
+		},
+
+		{
+			"type"			: "ScnTexture",
+			"name"			: "worldtexture1d_0",
+
+			"texturetype"	: "1d",
+			"width"			: 16
+		},
+
+		{
+			"type"			: "ScnTexture",
+			"name"			: "worldtexture2d_0",
+
+			"texturetype"	: "2d",
+			"width"			: 256,
+			"height"		: 256
+		},
+
+		{
+			"type"			: "ScnTexture",
+			"name"			: "worldtexture3d_0",
+
+			"texturetype"	: "3d",
+			"width"			: 256,
+			"height"		: 256,
+			"depth"			: 16
+		},
+
+		{
+			"type"			: "ScnTexture",
+			"name"			: "worldtexture1d_1",
+
+			"texturetype"	: "1d",
+			"width"			: 16
+		},
+
+		{
+			"type"			: "ScnTexture",
+			"name"			: "worldtexture2d_1",
+
+			"texturetype"	: "2d",
+			"width"			: 256,
+			"height"		: 256
+		},
+
+		{
+			"type"			: "ScnTexture",
+			"name"			: "worldtexture3d_1",
+
+			"texturetype"	: "3d",
+			"width"			: 256,
+			"height"		: 256,
+			"depth"			: 16
 		}
+
 	]
 }

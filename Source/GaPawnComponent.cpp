@@ -31,7 +31,7 @@ BCREFLECTION_DERIVED_END();
 // initialise
 void GaPawnComponent::initialise( const Json::Value& Object )
 {
-	Super::initialise( Object );
+	Super::initialise();
 	
 	Position_ = BcVec3d( 0.0f, 0.0f, 0.0f );
 	MoveDirection_ = BcVec3d( 0.0f, 0.0f, 0.0f );

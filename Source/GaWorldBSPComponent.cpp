@@ -42,7 +42,7 @@ BCREFLECTION_DERIVED_END();
 //virtual
 void GaWorldBSPComponent::initialise( const Json::Value& Object )
 {
-	Super::initialise( Object );
+	Super::initialise();
 
 	Json::Value Level = Object[ "level" ];
 	Json::Value IsEditor = Object[ "editor" ];
