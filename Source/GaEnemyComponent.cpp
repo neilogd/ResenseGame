@@ -31,7 +31,7 @@ BCREFLECTION_DERIVED_END();
 // initialise
 void GaEnemyComponent::initialise( const Json::Value& Object )
 {
-	Super::initialise( Object );
+	Super::initialise();
 
 	PulseTimer_ = 0.0f;
 

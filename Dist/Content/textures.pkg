@@ -59,6 +59,14 @@
 			"width"			: 256,
 			"height"		: 256,
 			"depth"			: 16
+		},
+
+		{
+			"type"			: "ScnRenderTarget",
+			"name"			: "screenrt",
+
+			"width"			: 320,
+			"height"		: 180
 		}
 
 	]

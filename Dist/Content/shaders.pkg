@@ -12,6 +12,16 @@
 
 		{
 			"type"			: "ScnShader",
+			"name"			: "screenrt",
+
+			"shaders"		: {
+				"vertex" 		: "Content/Source/screenrt.glslv",
+				"fragment" 		: "Content/Source/screenrt.glslf"
+			}
+		},
+
+		{
+			"type"			: "ScnShader",
 			"name"			: "air",
 
 			"shaders"		: {

@@ -300,9 +300,16 @@ void GaWorldPressureComponent::update( BcF32 Tick )
 	// Editor mode rendering.
 	if( BSP_->InEditorMode_ )
 	{
-		Canvas_->setMaterialComponent( DynamicMaterials_[ CurrMaterial_ ].PreviewMaterial_ );
+		Canvas_->setMaterialComponent( DynamicMaterials_[ CurrMaterial_ ].PreviewMaterial_ );		// THIS FUCKS THE RENDER TARGET. WHY?
+																									// Look at deprecated calls in gDebugger, fix em.
 		BcVec2d HalfBoxSize( BcVec2d( (BcF32)Width_, (BcF32)Height_ ) * Scale_ * 0.5f );
-		Canvas_->drawBox( -HalfBoxSize, HalfBoxSize, RsColour( 1.0f, 1.0f, 1.0f, 1.0f ), 0 );
+		Canvas_->drawBox( -HalfBoxSize, HalfBoxSize, RsColour( 1.0f, 1.0f, 1.0f, 1.0f ), 255 );
+	}
+	else
+	{
+		Canvas_->setMaterialComponent( ScreenRTMaterial_ );
+		BcVec2d HalfBoxSize( BcVec2d( 32.0f, -18.0f ) * 1.0f  );
+		Canvas_->drawBox( -HalfBoxSize, HalfBoxSize, RsColour( 1.0f, 1.0f, 1.0f, 1.0f ), 255 );
 	}
 }
 
@@ -379,6 +386,9 @@ void GaWorldPressureComponent::onAttach( ScnEntityWeakRef Parent )
 		DynamicMaterial.WorldTexture2D_ = DynamicMaterial.WorldMaterial_->getTexture( Texture2DParam );
 		DynamicMaterial.WorldTexture3D_ = DynamicMaterial.WorldMaterial_->getTexture( Texture3DParam );
 	}
+
+	ScreenRTMaterial_ = Parent->getComponentAnyParentByType< ScnMaterialComponent >( "ScnMaterialComponent_screenrt" );
+	BcAssertMsg( ScreenRTMaterial_.isValid(), "Material invalid for screenrt" );
 
 	// Attach materials.
 	for( BcU32 Idx = 0; Idx < 2; ++Idx )

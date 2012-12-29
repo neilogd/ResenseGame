@@ -14,14 +14,39 @@
 
 			// State
 			"state"			: {
-				"depth_write_enable" 		: 1,
-				"depth_test_enable" 		: 1,
+				"depth_write_enable" 		: 0,
+				"depth_test_enable" 		: 0,
 				"depth_test_compare" 		: "lessequal",
 				"depth_bias" 				: 0,
 				"alpha_test_enable" 		: 0,
 				"alpha_test_compare" 		: "never",
 				"alpha_test_threshold" 		: 0,
 				"blend_mode" 				: "blend"
+			}
+		},
+
+		{
+			"type"			: "ScnMaterial",
+			"name"			: "screenrt",
+
+			// Shader
+			"shader"		: "$(ScnShader:shaders.screenrt)",
+
+			// Textures
+			"textures"		: {
+				"aDiffuseTex"	: "$(ScnTexture:textures.screenrt)"
+			},
+
+			// State
+			"state"			: {
+				"depth_write_enable" 		: 0,
+				"depth_test_enable" 		: 0,
+				"depth_test_compare" 		: "lessequal",
+				"depth_bias" 				: 0,
+				"alpha_test_enable" 		: 0,
+				"alpha_test_compare" 		: "never",
+				"alpha_test_threshold" 		: 0,
+				"blend_mode" 				: "none"
 			}
 		},
 

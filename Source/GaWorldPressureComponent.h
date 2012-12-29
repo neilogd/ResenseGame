@@ -127,6 +127,8 @@ private:
 	TDynamicMaterial					DynamicMaterials_[ 2 ];
 	BcU32								CurrMaterial_;
 
+	ScnMaterialComponentRef				ScreenRTMaterial_;
+
 	// Graphics data.
 	BcBool								IsReady_;
 	GaWorldPressureVertex*				pVertexArray_;

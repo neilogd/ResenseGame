@@ -29,7 +29,9 @@
 					"near"					: 0.1,
 					"far"					: 1000.0,
 					"hfov"					: 0.75,
-					"vfov"					: 0.0
+					"vfov"					: 0.0,
+					"rendertarget"			: "$(ScnRenderTarget:textures.screenrt)",
+					"rendermask"			: 2
 				}
 			]
 		},
@@ -57,6 +59,18 @@
 				{
 					"type"					: "ScnCanvasComponent",
 					"noofvertices" 			: 8192
+				},
+
+				{
+					"type"					: "ScnViewComponent",
+					"x"						: 0.0,
+					"y"						: 0.0,
+					"width"					: 1.0,
+					"height"				: 1.0,
+					"near"					: 0.1,
+					"far"					: 1000.0,
+					"hfov"					: 0.75,
+					"vfov"					: 0.0
 				},
 
 				{
@@ -106,6 +120,13 @@
 					"type"					: "ScnMaterialComponent",
 					"name"					: "ScnMaterialComponent_airpreview_1",
 					"material"				: "$(ScnMaterial:materials.airpreview_1)",
+					"permutation"			: "2d"
+				},
+
+				{
+					"type"					: "ScnMaterialComponent",
+					"name"					: "ScnMaterialComponent_screenrt",
+					"material"				: "$(ScnMaterial:materials.screenrt)",
 					"permutation"			: "2d"
 				},
 
@@ -139,6 +160,18 @@
 				},
 
 				{
+					"type"					: "ScnViewComponent",
+					"x"						: 0.0,
+					"y"						: 0.0,
+					"width"					: 1.0,
+					"height"				: 1.0,
+					"near"					: 0.1,
+					"far"					: 1000.0,
+					"hfov"					: 0.75,
+					"vfov"					: 0.0
+				},
+
+				{
 					"type"					: "GaWorldInfoComponent",
 					"width"					: 256,
 					"height"				: 256,
@@ -189,6 +222,13 @@
 				},
 
 				{
+					"type"					: "ScnMaterialComponent",
+					"name"					: "ScnMaterialComponent_screenrt",
+					"material"				: "$(ScnMaterial:materials.screenrt)",
+					"permutation"			: "2d"
+				},
+
+				{
 					"type"					: "ScnFontComponent",
 					"font"					: "$(ScnFont:fonts.default)",
 					"material"				: "$(ScnMaterial:materials.font)"
@@ -202,7 +242,8 @@
 				},
 
 				{
-					"type"					: "GaWorldPressureComponent"
+					"type"					: "GaWorldPressureComponent",
+					"rendermask"			: 2
 				}
 			]
 		}

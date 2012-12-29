@@ -199,8 +199,11 @@ void GaPlayerComponent::onDetach( ScnEntityWeakRef Parent )
 	Pawn_ = NULL;
 	
 	ScnEntityRef WorldEntity = ScnCore::pImpl()->findEntity( "WorldEntity_0" );
-	WorldEntity->unsubscribeAll( this );
-	
+	if( WorldEntity.isValid() )
+	{
+		WorldEntity->unsubscribeAll( this );
+	}
+
 	// Don't forget to detach!
 	Super::onDetach( Parent );
 }
