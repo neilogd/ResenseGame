@@ -29,47 +29,18 @@
 PsySetupParams GPsySetupParams( "7DFPS Game", psySF_GAME_DEV, 1.0f / 60.0f );	
 
 //////////////////////////////////////////////////////////////////////////
-// OnUpdate
-eEvtReturn OnUpdate( EvtID ID, const SysSystemEvent& Event )
-{
-	// If processing has completed stop the kernel.
-	if( GaTopState::pImpl()->process() )
-	{
-		// Free topstate.
-		delete GaTopState::pImpl();
-
-		// Stop kernel.
-		SysKernel::pImpl()->stop();
-
-		return evtRET_REMOVE;
-	}
-	
-	return evtRET_PASS;
-}
-
-//////////////////////////////////////////////////////////////////////////
-// OnQuit
-eEvtReturn OnQuit( EvtID ID, const OsEventCore& Event )
-{
-	GaTopState::pImpl()->leaveState();
-
-	return evtRET_REMOVE;
-}
-
-//////////////////////////////////////////////////////////////////////////
 // PsyGameInit
 void PsyGameInit()
 {
-	// Create a new game top state.
-	new GaTopState();
 
-	// Subscribe to update.
-	SysSystemEvent::Delegate OnUpdateDelegate = SysSystemEvent::Delegate::bind< OnUpdate >();
-	OsCore::pImpl()->subscribe( sysEVT_SYSTEM_POST_UPDATE, OnUpdateDelegate );
+}
 
-	// Subscribe to quit.
-	OsEventCore::Delegate OnQuitDelegate = OsEventCore::Delegate::bind< OnQuit >();
-	OsCore::pImpl()->subscribe( osEVT_CORE_QUIT, OnQuitDelegate );
+//////////////////////////////////////////////////////////////////////////
+// PsyLaunchGame
+void PsyLaunchGame()
+{
+	// Spawn the editor entity.
+	ScnCore::pImpl()->spawnEntity( NULL, "default", "EditorEntity", "WorldEntity_0" );
 }
 
 //////////////////////////////////////////////////////////////////////////
