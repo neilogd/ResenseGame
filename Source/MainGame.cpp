@@ -13,8 +13,6 @@
 
 #include "Psybrus.h"
 
-#include "GaTopState.h"
-
 #include "GaEnemyComponent.h"
 #include "GaPawnComponent.h"
 #include "GaPlayerComponent.h"
@@ -40,7 +38,13 @@ void PsyGameInit()
 void PsyLaunchGame()
 {
 	// Spawn the editor entity.
-	ScnCore::pImpl()->spawnEntity( NULL, "default", "EditorEntity", "WorldEntity_0" );
+	ScnEntitySpawnParams Params = 
+	{
+		"default", "EditorEntity", "WorldEntity_0",
+		BcMat4d(),
+		NULL
+	};
+	ScnCore::pImpl()->spawnEntity( Params );
 }
 
 //////////////////////////////////////////////////////////////////////////

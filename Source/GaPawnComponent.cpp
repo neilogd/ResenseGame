@@ -125,7 +125,7 @@ void GaPawnComponent::update( BcF32 Tick )
 	}
 
 	// Set position in entity.
-	getParentEntity()->setPosition( Position_ );
+	getParentEntity()->setLocalPosition( Position_ );
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -142,7 +142,7 @@ void GaPawnComponent::onAttach( ScnEntityWeakRef Parent )
 	Pressure_ = WorldEntity->getComponentByType< GaWorldPressureComponent >( 0 );
 
 	// Grab position.
-	Position_ = Parent->getPosition();
+	Position_ = Parent->getWorldPosition();
 }
 
 //////////////////////////////////////////////////////////////////////////

@@ -140,7 +140,7 @@
 					"type"					: "GaWorldBSPComponent",
 					"editor"				: false,
 					"level"					: 1,
-					"player"				: "$(ScnEntity:this.PlayerEntity)"
+					"player"				: "#(ScnEntity:this.PlayerEntity)"
 				},
 
 				{

@@ -268,7 +268,7 @@ void GaWorldBSPComponent::update( BcF32 Tick )
 	// Next level stuff.
 	if( !InEditorMode_ )
 	{
-		BcVec3d PlayerPosition = PlayerEntity_->getPosition();
+		BcVec3d PlayerPosition = PlayerEntity_->getWorldPosition();
 		BcF32 Distance = ( BcVec3d( QuitPosition_, 0.0f ) - PlayerPosition ).magnitude();
 
 		if( Distance < 2.0f )
@@ -338,12 +338,12 @@ void GaWorldBSPComponent::onAttach( ScnEntityWeakRef Parent )
 	WorldInfo_ = Parent->getComponentAnyParentByType< GaWorldInfoComponent >( 0 );
 
 	ScnMaterialRef Material;
-	if( CsCore::pImpl()->requestResource( "materials", "default", Material ) && CsCore::pImpl()->createResource( BcName::INVALID, getPackage(), Material_, Material, scnSPF_2D ) )
+	if( CsCore::pImpl()->requestResource( "materials", "default", Material ) && CsCore::pImpl()->createResource( BcName::INVALID, getPackage(), Material_, Material, scnSPF_STATIC_2D ) )
 	{
 		Parent->attach( Material_ );
 	}
 	
-	if( CsCore::pImpl()->requestResource( "materials", "airsolid", Material ) && CsCore::pImpl()->createResource( BcName::INVALID, getPackage(), MaterialWorld_, Material, scnSPF_3D ) )
+	if( CsCore::pImpl()->requestResource( "materials", "airsolid", Material ) && CsCore::pImpl()->createResource( BcName::INVALID, getPackage(), MaterialWorld_, Material, scnSPF_STATIC_3D ) )
 	{
 		Parent->attach( MaterialWorld_ );
 	}
@@ -853,7 +853,7 @@ BcBool GaWorldBSPComponent::killEnemy( const BcVec3d& Position, BcF32 Radius )
 	std::vector< ScnEntityRef >::iterator NearestIt = EnemyEntities_.end();
 	for( std::vector< ScnEntityRef >::iterator It = EnemyEntities_.begin(); It != EnemyEntities_.end(); ++It )
 	{
-		BcF32 DistanceSquared = ( (*It)->getPosition() - Position ).magnitudeSquared();
+		BcF32 DistanceSquared = ( (*It)->getWorldPosition() - Position ).magnitudeSquared();
 		if( DistanceSquared < NearestDistanceSquared )
 		{
 			NearestDistanceSquared = DistanceSquared;
@@ -886,7 +886,7 @@ void GaWorldBSPComponent::killPlayer()
 BcBool GaWorldBSPComponent::canSeePlayer( const BcVec3d& From )
 {
 	BcBSPPointInfo BSPPointInfo;
-	if( !lineIntersection( From, PlayerEntity_->getPosition(), &BSPPointInfo ) )
+	if( !lineIntersection( From, PlayerEntity_->getWorldPosition(), &BSPPointInfo ) )
 	{
 		return BcTrue;
 	}
@@ -1155,7 +1155,7 @@ void GaWorldBSPComponent::createEntities()
 	{
 		BcVec2d Enemy( Enemies_[ Idx ] );
 		ScnEntityRef EnemyEntity = ScnCore::pImpl()->createEntity( "default", "EnemyEntity", "EnemyEntity" );
-		EnemyEntity->setPosition( BcVec3d( Enemy.x(), Enemy.y(), 1.0f ) );
+		EnemyEntity->setLocalPosition( BcVec3d( Enemy.x(), Enemy.y(), 1.0f ) );
 		EnemyEntities_.push_back( EnemyEntity );
 		getParentEntity()->attach( EnemyEntity );
 	}

@@ -93,8 +93,8 @@ void GaPlayerSoundComponent::update( BcF32 Tick )
 	
 		BcVec3d IntersectionL = intersection( RayVectorL );
 		BcVec3d IntersectionR = intersection( RayVectorR );
-		DistanceL += ( IntersectionL - getParentEntity()->getPosition() ).magnitude();
-		DistanceR += ( IntersectionR - getParentEntity()->getPosition() ).magnitude();
+		DistanceL += ( IntersectionL - getParentEntity()->getWorldPosition() ).magnitude();
+		DistanceR += ( IntersectionR - getParentEntity()->getWorldPosition() ).magnitude();
 
 		MinDistanceL = BcMin( MinDistanceL, DistanceL );
 		MinDistanceR = BcMin( MinDistanceR, DistanceR );
@@ -219,7 +219,7 @@ void GaPlayerSoundComponent::onDetach( ScnEntityWeakRef Parent )
 // intersection
 BcVec3d GaPlayerSoundComponent::intersection( const BcVec3d& Direction )
 {
-	BcVec3d Position = getParentEntity()->getPosition();
+	BcVec3d Position = getParentEntity()->getWorldPosition();
 	BcVec3d Target = Position + Direction * 256.0f;
 	BcBSPPointInfo BSPPointInfo;
 	if( BSP_->lineIntersection( Position, Target, &BSPPointInfo ) )
