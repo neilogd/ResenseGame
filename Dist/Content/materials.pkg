@@ -25,7 +25,7 @@
 			}
 		},
 
-		{
+		{ 
 			"type"			: "ScnMaterial",
 			"name"			: "screenrt",
 

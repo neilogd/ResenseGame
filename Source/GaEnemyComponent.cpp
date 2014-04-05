@@ -40,7 +40,7 @@ void GaEnemyComponent::initialise( const Json::Value& Object )
 }
 
 //////////////////////////////////////////////////////////////////////////
-// GaEnemyComponent
+// update
 //virtual
 void GaEnemyComponent::update( BcF32 Tick )
 {
@@ -51,7 +51,7 @@ void GaEnemyComponent::update( BcF32 Tick )
 	PulseTimer_ += Tick;
 
 	// Set direction and handle if we need to change direction.
-	BcVec3d Position = getParentEntity()->getLocalPosition();
+	BcVec3d Position = getParentEntity()->getWorldPosition();
 	MoveVector = Direction_;
 
 	BcBSPPointInfo BSPPointInfo;
@@ -163,7 +163,7 @@ BcVec3d GaEnemyComponent::findLongestDirection()
 		BcVec3d(  0.0f, -1.0f,  0.0f ),
 	};
 
-	BcVec3d Position = getParentEntity()->getLocalPosition();
+	BcVec3d Position = getParentEntity()->getWorldPosition();
 
 	BcBSPPointInfo BSPPointInfo;
 	for( BcU32 Idx = 0; Idx < 4; ++Idx )

@@ -1192,7 +1192,7 @@ void GaWorldBSPComponent::buildBSP()
 		pVertexBuffer_ = NULL;
 
 		RsCore::pImpl()->destroyResource( pPrimitive_ );
-		pVertexBuffer_ = NULL;
+		pPrimitive_ = NULL;
 
 		// Wait for renderer.
 		SysFence Fence( RsCore::WORKER_MASK );
