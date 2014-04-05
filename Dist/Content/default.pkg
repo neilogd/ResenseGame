@@ -22,6 +22,7 @@
 
 				{
 					"type"					: "ScnViewComponent",
+					"name"					: "ScnViewComponent_screenrt",
 					"x"						: 0.0,
 					"y"						: 0.0,
 					"width"					: 1.0,
@@ -63,6 +64,7 @@
 
 				{
 					"type"					: "ScnViewComponent",
+					"name"					: "ScnViewComponent_main",
 					"x"						: 0.0,
 					"y"						: 0.0,
 					"width"					: 1.0,
@@ -144,7 +146,8 @@
 				},
 
 				{
-					"type"					: "GaWorldPressureComponent"
+					"type"					: "GaWorldPressureComponent",
+					"rendermask"			: 2
 				}
 			]
 		},
@@ -161,6 +164,7 @@
 
 				{
 					"type"					: "ScnViewComponent",
+					"name"					: "ScnViewComponent_main",
 					"x"						: 0.0,
 					"y"						: 0.0,
 					"width"					: 1.0,
