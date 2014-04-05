@@ -33,7 +33,7 @@ public:
 	BcForceInline ~BcScopedLogTimer()
 	{
 		BcF32 Time = Timer_.time();
-		//BcPrintf("BcScopedLogTimer: %s, %f ms\n", Text_.c_str(), Time * 1000.0f);
+		BcPrintf("BcScopedLogTimer: %s, %f ms\n", Text_.c_str(), Time * 1000.0f);
 	}
 
 private:
@@ -52,6 +52,7 @@ typedef CsResourceRef< class GaWorldPressureComponent > GaWorldPressureComponent
 struct GaWorldPressureSample
 {
 	BcF32							Value_;
+	BcF32							DampingMultiplier_;
 };
 
 //////////////////////////////////////////////////////////////////////////
@@ -90,7 +91,7 @@ protected:
 
 protected:
 	void								updateSimulation();
-	void								collideSimulation();
+	void								collideSimulation( BcU32 Buffer, BcBool OnlyBake );
 	void								updateTexture();
 	void								updateGlowTextures();
 
