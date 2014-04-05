@@ -9,6 +9,7 @@ My 7DFPS entry from 2012 brought up to date and working with the latest version 
 To build, setup a folder structure like so:
 
 PsybrusDev/Psybrus 			- should be a clone of https://github.com/neilogd/Psybrus
+
 PsybrusDev/ResenseGame	- should be a clone of https://github.com/neilogd/ResenseGame
 
 Then to generate the VS project run make_vs2012_build. VS2012 is the earliest version supported due to some C++11 in Psybrus.
