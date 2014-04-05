@@ -39,7 +39,7 @@ void GaPawnComponent::initialise( const Json::Value& Object )
 }
 
 //////////////////////////////////////////////////////////////////////////
-// update
+// GaPawnComponent
 //virtual
 void GaPawnComponent::update( BcF32 Tick )
 {
@@ -142,7 +142,7 @@ void GaPawnComponent::onAttach( ScnEntityWeakRef Parent )
 	Pressure_ = WorldEntity->getComponentByType< GaWorldPressureComponent >( 0 );
 
 	// Grab position.
-	Position_ = Parent->getLocalPosition();
+	Position_ = Parent->getWorldPosition();
 }
 
 //////////////////////////////////////////////////////////////////////////

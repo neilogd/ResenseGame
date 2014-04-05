@@ -51,7 +51,7 @@ void GaPlayerComponent::initialise( const Json::Value& Object )
 }
 
 //////////////////////////////////////////////////////////////////////////
-// update
+// GaPlayerComponent
 //virtual
 void GaPlayerComponent::update( BcF32 Tick )
 {
@@ -293,7 +293,7 @@ eEvtReturn GaPlayerComponent::onMouseEvent( EvtID ID, const OsEventInputMouse& E
 // doShot
 BcVec3d GaPlayerComponent::doShot( const BcVec3d& Direction, BcF32 TrailPower, BcF32 MuzzlePower, BcF32 ImpactPower )
 {
-	BcVec3d Position = getParentEntity()->getWorldPosition();
+	BcVec3d Position = getParentEntity()->getLocalPosition();
 	BcVec3d Target = Position + Direction * 256.0f;
 
 	BcBSPPointInfo BSPPointInfo;
