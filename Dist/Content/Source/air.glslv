@@ -3,9 +3,9 @@ out vec4 vWorldPosition;
 
 vec4 shaderMain(vec4 inPosition)
 {
-	vEyePosition.x = uInverseViewTransform[0][3];
-	vEyePosition.y = uInverseViewTransform[1][3];
-	vEyePosition.z = uInverseViewTransform[2][3];
+	vEyePosition.x = uInverseViewTransform[3][0];
+	vEyePosition.y = uInverseViewTransform[3][1];
+	vEyePosition.z = uInverseViewTransform[3][2];
 	vWorldPosition = uWorldTransform * aPosition;
 	vTexCoord0 = aTexCoord0;
 
