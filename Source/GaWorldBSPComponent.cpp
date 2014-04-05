@@ -1257,7 +1257,7 @@ void GaWorldBSPComponent::buildBSP()
 		pBSPTree_->buildTree();
 
 		// Setup primitive and vertex buffer.
-		pVertexBuffer_ = RsCore::pImpl()->createVertexBuffer( VertexDescriptor, NoofVertices, pVertexArray_ ); 
+		pVertexBuffer_ = RsCore::pImpl()->createVertexBuffer( RsVertexBufferDesc( VertexDescriptor, NoofVertices ), pVertexArray_ ); 
 		pPrimitive_ = RsCore::pImpl()->createPrimitive( pVertexBuffer_, NULL );
 	}
 }

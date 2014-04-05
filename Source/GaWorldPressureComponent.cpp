@@ -240,7 +240,7 @@ void GaWorldPressureComponent::create__onAttach()
 		pVertexArray_[ Idx ].Z_ *= Scale_;
 	}
 
-	pVertexBuffer_ = RsCore::pImpl()->createVertexBuffer( VertexDescriptor, NoofVertices, pVertexArray_ ); 
+	pVertexBuffer_ = RsCore::pImpl()->createVertexBuffer( RsVertexBufferDesc( VertexDescriptor, NoofVertices ), pVertexArray_ ); 
 	pPrimitive_ = RsCore::pImpl()->createPrimitive( pVertexBuffer_, NULL );
 
 	CurrMaterial_ = 0;
