@@ -1,5 +1,3 @@
-varying vec4 vTexCoord0;
-
 vec4 shaderMain(vec4 inPosition)
 {
 	vec4 Vertex = aPosition;

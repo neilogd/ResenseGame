@@ -1,6 +1,6 @@
 openal32LibPath = "../../Psybrus/External/openal/libs/Win32/"
 
-project "7FPSGame"
+project "ResenseGame"
 	kind "WindowedApp"
 	language "C++"
 	files { "./**.hh", "./**.h", "./**.c", "./**.cpp" }

@@ -1,8 +1,4 @@
-varying vec4 vTexCoord0;
-
 uniform sampler2D aDiffuseTex;	
-
-uniform vec2 aAlphaTestStep;
 
 vec4 shaderMain()
 {						
