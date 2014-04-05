@@ -21,12 +21,22 @@ Basics
 When you start up the game, you will be taken to the map editor screen. Controls are as follows:
 
 0-9: Switch to a different level (will not save!)
+
 Tab: Toggle in and out of game play.
+
 X: Save and rebuild BSP.
+
 B: Rebuild BSP.
+
 E: Add an enemy where the cursor is.
+
 S: Set start position to be where the cursor is.
+
 Q: Set the quit location to be where the cursor is.
+
 Left mouse click: Begin placing points for BSP hull. Note: Must be convex, there is no checking as this was a game jam game after all.
+
 Right mouse click: Delete a point or edge.
+
 Middle mouse click: Flip normal of edge.
+
