@@ -13,6 +13,8 @@
 
 #include "GaEnemyComponent.h"
 
+#include "Base/BcBSPTree.h"
+
 //////////////////////////////////////////////////////////////////////////
 // Define resource internals.
 DEFINE_RESOURCE( GaEnemyComponent );

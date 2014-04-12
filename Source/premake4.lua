@@ -1,15 +1,20 @@
-openal32LibPath = "../../Psybrus/External/openal/libs/Win32/"
+openal32LibPath = psybrusSDK .. "/External/openal/libs/Win32/"
 
 project "ResenseGame"
 	kind "WindowedApp"
 	language "C++"
 	files { "./**.hh", "./**.h", "./**.c", "./**.cpp" }
-	includedirs { "./", "../../Psybrus/Engine/Source/Shared/", "../../Psybrus/Engine/Source/Platforms/Windows/" }
+   includedirs { 
+      "./", 
+      "../../Psybrus/Engine/Source/Shared/", 
+      "../../Psybrus/Engine/Source/Platforms/Windows/"
+   }
 
 	-- External includes.
-	includedirs { 
-      "../../Psybrus/External/jsoncpp/include", 
-      "../../Psybrus/External/portaudio/include"
+   includedirs { 
+      psybrusSDK .. "/External/jsoncpp/include", 
+      psybrusSDK .. "/External/portaudio/include",
+      boostInclude
    }
 
 	configuration "windows"

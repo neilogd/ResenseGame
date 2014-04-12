@@ -15,6 +15,7 @@
 #define __GAWORLDINFOCOMPONENT_H__
 
 #include "Psybrus.h"
+#include "System/Scene/ScnCanvasComponent.h"
 
 //////////////////////////////////////////////////////////////////////////
 // GaWorldInfoComponentRef

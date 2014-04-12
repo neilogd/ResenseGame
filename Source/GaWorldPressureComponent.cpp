@@ -13,6 +13,13 @@
 
 #include "GaWorldPressureComponent.h"
 
+#include "Base/BcProfiler.h"
+#include "Base/BcRandom.h"
+
+#include "System/SysKernel.h"
+
+#include "System/Scene/ScnViewComponent.h"
+
 #define PROFILE_PRESSURE_UPDATE ( 0 )
 
 //////////////////////////////////////////////////////////////////////////
@@ -283,15 +290,17 @@ BcAABB GaWorldPressureComponent::getAABB() const
 //virtual
 void GaWorldPressureComponent::update( BcF32 Tick )
 {
+	PSY_PROFILER_SECTION( Update, "GaWorldPressureComponent::update" );
+
 	// Wait for update to have finished.
 	UpdateFence_.wait();
 	
 	// Collide with BSP.
 	// NOTE: Dirty hack. We should only do this if the BSP is dirty. This gets around
 	//       the editor changing the BSP on us.
-	static int ticker = 31;
+	static int ticker = -1;
 	++ticker;
-	if( ticker % 32 == 0 )
+	if( ticker % 4 == 0 )
 	{
 		collideSimulation( CurrBuffer_, BcTrue );
 		collideSimulation( 1 - CurrBuffer_, BcTrue );
@@ -480,6 +489,9 @@ void GaWorldPressureComponent::updateSimulation()
 	BcScopedLogTimer ScopedTimer("Update Simulation");
 #endif
 
+	PSY_PROFILER_SECTION( Simulation, "Update Simulation" );
+
+
 	for( BcU32 Iters = 0; Iters < 2; ++Iters )
 	{
 		const register BcU32 WidthLessOne = Width_ - 1;
@@ -545,6 +557,8 @@ void GaWorldPressureComponent::collideSimulation( BcU32 Buffer, BcBool OnlyBake 
 #if PROFILE_PRESSURE_UPDATE
 	BcScopedLogTimer ScopedTimer("Collide Simulation");
 #endif
+
+	PSY_PROFILER_SECTION( Collide, "Collide simulation" );
 
 	const register BcU32 WidthLessOne = Width_ - 1;
 	const register BcU32 HeightLessOne = Height_ - 1;
@@ -615,6 +629,8 @@ void GaWorldPressureComponent::updateTexture()
 #if PROFILE_PRESSURE_UPDATE
 	BcScopedLogTimer ScopedTimer("Update Texture");
 #endif
+
+	PSY_PROFILER_SECTION( Texture, "Update Texture" );
 
 	const BcF32 Brightness = 2.5f;
 	TDynamicMaterial& DynamicMaterial( DynamicMaterials_[ CurrMaterial_ ] );

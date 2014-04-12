@@ -13,6 +13,8 @@
 
 #include "GaPlayerSoundComponent.h"
 
+#include "Base/BcBSPTree.h"
+
 //////////////////////////////////////////////////////////////////////////
 // Define resource internals.
 DEFINE_RESOURCE( GaPlayerSoundComponent );

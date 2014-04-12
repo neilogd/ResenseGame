@@ -14,7 +14,7 @@
 #ifndef __GaEnemyComponent_H__
 #define __GaEnemyComponent_H__
 
-#include "Psybrus.h"
+#include "System/Scene/ScnCanvasComponent.h"
 
 #include "GaPawnComponent.h"
 #include "GaWorldBSPComponent.h"

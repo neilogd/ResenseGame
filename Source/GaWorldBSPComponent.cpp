@@ -15,6 +15,12 @@
 
 #include "GaPawnComponent.h"
 
+#include "Base/BcBSPTree.h"
+#include "Base/BcFile.h"
+
+#include "System/Os/OsCore.h"
+#include "System/Content/CsCore.h"
+
 //////////////////////////////////////////////////////////////////////////
 // Round
 static BcVec2d RoundVector( BcVec2d Vector )

@@ -13,6 +13,10 @@
 
 #include "GaPawnComponent.h"
 
+#include "Base/BcBSPTree.h"
+
+#include "System/Os/OsCore.h"
+
 //////////////////////////////////////////////////////////////////////////
 // Define resource internals.
 DEFINE_RESOURCE( GaPawnComponent );

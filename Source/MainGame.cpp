@@ -13,6 +13,8 @@
 
 #include "Psybrus.h"
 
+#include "System/Content/CsCore.h"
+
 #include "GaEnemyComponent.h"
 #include "GaPawnComponent.h"
 #include "GaPlayerComponent.h"

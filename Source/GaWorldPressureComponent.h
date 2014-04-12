@@ -15,6 +15,7 @@
 #define __GAWORLDPRESSURECOMPONENT_H__
 
 #include "Psybrus.h"
+#include "System/Scene/ScnCanvasComponent.h"
 
 #include "GaWorldInfoComponent.h"
 #include "GaWorldBSPComponent.h"
@@ -32,7 +33,7 @@ public:
 
 	BcForceInline ~BcScopedLogTimer()
 	{
-		BcF32 Time = Timer_.time();
+		BcF64 Time = Timer_.time();
 		BcPrintf("BcScopedLogTimer: %s, %f ms\n", Text_.c_str(), Time * 1000.0f);
 	}
 

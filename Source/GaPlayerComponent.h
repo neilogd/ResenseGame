@@ -15,6 +15,7 @@
 #define __GaPlayerComponent_H__
 
 #include "Psybrus.h"
+#include "System/Scene/ScnCanvasComponent.h"
 
 #include "GaPawnComponent.h"
 #include "GaWorldBSPComponent.h"

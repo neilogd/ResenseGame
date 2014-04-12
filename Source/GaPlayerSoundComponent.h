@@ -16,6 +16,10 @@
 
 #include "Psybrus.h"
 
+#include "Base/BcRandom.h"
+
+#include "System/Scene/ScnCanvasComponent.h"
+
 #include "GaPawnComponent.h"
 #include "GaPlayerComponent.h"
 #include "GaWorldBSPComponent.h"

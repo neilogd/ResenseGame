@@ -16,6 +16,11 @@
 
 #include "Psybrus.h"
 
+#include "System/Scene/ScnCanvasComponent.h"
+#include "System/Scene/ScnFont.h"
+
+#include "System/Os/OsEvents.h"
+
 #include "GaWorldInfoComponent.h"
 
 //////////////////////////////////////////////////////////////////////////
@@ -122,9 +127,9 @@ public:
 
 	void								buildBSP();
 
-	BcBool								checkPointFront( const BcVec3d& Point, BcF32 Radius, BcBSPInfo* pData = NULL, BcBSPNode* pNode = NULL );
-	BcBool								checkPointBack( const BcVec3d& Point, BcF32 Radius, BcBSPInfo* pData = NULL, BcBSPNode* pNode = NULL );
-	BcBool								lineIntersection( const BcVec3d& A, const BcVec3d& B, BcBSPPointInfo* pPointInfo, BcBSPNode* pNode = NULL );
+	BcBool								checkPointFront( const BcVec3d& Point, BcF32 Radius, struct BcBSPInfo* pData = NULL, struct BcBSPNode* pNode = NULL );
+	BcBool								checkPointBack( const BcVec3d& Point, BcF32 Radius, struct BcBSPInfo* pData = NULL, struct BcBSPNode* pNode = NULL );
+	BcBool								lineIntersection( const BcVec3d& A, const BcVec3d& B, struct BcBSPPointInfo* pPointInfo, struct BcBSPNode* pNode = NULL );
 
 	void								clearMessages();
 	void								addMessage( const BcChar* pMessage );
@@ -170,7 +175,7 @@ public:
 	BcU32								NearestEdge_;
 	BcU32								NearestEnemy_;
 
-	BcBSPTree*							pBSPTree_;
+	class BcBSPTree*					pBSPTree_;
 
 	GaWorldBSPVertex*					pVertexArray_;
 	RsVertexBuffer*						pVertexBuffer_;
