@@ -14,6 +14,7 @@
 #include "GaPlayerComponent.h"
 
 #include "Base/BcBSPTree.h"
+#include "Base/BcMath.h"
 
 #include "System/Os/OsCore.h"
 

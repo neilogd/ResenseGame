@@ -17,6 +17,7 @@
 
 #include "Base/BcBSPTree.h"
 #include "Base/BcFile.h"
+#include "Base/BcMath.h"
 
 #include "System/Os/OsCore.h"
 #include "System/Content/CsCore.h"

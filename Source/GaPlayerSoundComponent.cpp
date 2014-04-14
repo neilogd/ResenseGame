@@ -14,6 +14,7 @@
 #include "GaPlayerSoundComponent.h"
 
 #include "Base/BcBSPTree.h"
+#include "Base/BcMath.h"
 
 //////////////////////////////////////////////////////////////////////////
 // Define resource internals.

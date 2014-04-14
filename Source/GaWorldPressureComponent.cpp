@@ -15,6 +15,7 @@
 
 #include "Base/BcProfiler.h"
 #include "Base/BcRandom.h"
+#include "Base/BcMath.h"
 
 #include "System/SysKernel.h"
 
