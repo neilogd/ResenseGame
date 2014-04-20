@@ -45,7 +45,7 @@ private:
 
 //////////////////////////////////////////////////////////////////////////
 // GaExampleComponentRef
-typedef CsResourceRef< class GaWorldPressureComponent > GaWorldPressureComponentRef;
+typedef ReObjectRef< class GaWorldPressureComponent > GaWorldPressureComponentRef;
 
 
 //////////////////////////////////////////////////////////////////////////

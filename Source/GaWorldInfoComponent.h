@@ -19,7 +19,7 @@
 
 //////////////////////////////////////////////////////////////////////////
 // GaWorldInfoComponentRef
-typedef CsResourceRef< class GaWorldInfoComponent > GaWorldInfoComponentRef;
+typedef ReObjectRef< class GaWorldInfoComponent > GaWorldInfoComponentRef;
 
 //////////////////////////////////////////////////////////////////////////
 // GaWorldInfoComponent
