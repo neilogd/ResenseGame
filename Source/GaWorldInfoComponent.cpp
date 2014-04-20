@@ -17,15 +17,11 @@
 // Define resource internals.
 DEFINE_RESOURCE( GaWorldInfoComponent );
 
-BCREFLECTION_EMPTY_REGISTER( GaWorldInfoComponent );
-/*
-BCREFLECTION_DERIVED_BEGIN( ScnComponent, GaWorldInfoComponent )
-	BCREFLECTION_MEMBER( BcName,							Name_,							bcRFF_DEFAULT | bcRFF_TRANSIENT ),
-	BCREFLECTION_MEMBER( BcU32,								Index_,							bcRFF_DEFAULT | bcRFF_TRANSIENT ),
-	BCREFLECTION_MEMBER( CsPackage,							pPackage_,						bcRFF_POINTER | bcRFF_TRANSIENT ),
-	BCREFLECTION_MEMBER( BcU32,								RefCount_,						bcRFF_DEFAULT | bcRFF_TRANSIENT ),
-BCREFLECTION_DERIVED_END();
-*/
+void GaWorldInfoComponent::StaticRegisterClass()
+{
+	ReRegisterClass< GaWorldInfoComponent, Super >()
+		.addAttribute( new ScnComponentAttribute( 0 ) );
+}
 
 //////////////////////////////////////////////////////////////////////////
 // initialise

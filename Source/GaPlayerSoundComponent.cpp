@@ -20,15 +20,11 @@
 // Define resource internals.
 DEFINE_RESOURCE( GaPlayerSoundComponent );
 
-BCREFLECTION_EMPTY_REGISTER( GaPlayerSoundComponent );
-/*
-BCREFLECTION_DERIVED_BEGIN( ScnComponent, GaPlayerSoundComponent )
-	BCREFLECTION_MEMBER( BcName,							Name_,							bcRFF_DEFAULT | bcRFF_TRANSIENT ),
-	BCREFLECTION_MEMBER( BcU32,								Index_,							bcRFF_DEFAULT | bcRFF_TRANSIENT ),
-	BCREFLECTION_MEMBER( CsPackage,							pPackage_,						bcRFF_POINTER | bcRFF_TRANSIENT ),
-	BCREFLECTION_MEMBER( BcU32,								RefCount_,						bcRFF_DEFAULT | bcRFF_TRANSIENT ),
-BCREFLECTION_DERIVED_END();
-*/
+void GaPlayerSoundComponent::StaticRegisterClass()
+{
+	ReRegisterClass< GaPlayerSoundComponent, Super >()
+		.addAttribute( new ScnComponentAttribute( 0 ) );
+}
 
 //////////////////////////////////////////////////////////////////////////
 // PortAudio init/deinit.

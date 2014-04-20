@@ -21,15 +21,11 @@
 // Define resource internals.
 DEFINE_RESOURCE( GaPawnComponent );
 
-BCREFLECTION_EMPTY_REGISTER( GaPawnComponent );
-/*
-BCREFLECTION_DERIVED_BEGIN( ScnComponent, GaPawnComponent )
-	BCREFLECTION_MEMBER( BcName,							Name_,							bcRFF_DEFAULT | bcRFF_TRANSIENT ),
-	BCREFLECTION_MEMBER( BcU32,								Index_,							bcRFF_DEFAULT | bcRFF_TRANSIENT ),
-	BCREFLECTION_MEMBER( CsPackage,							pPackage_,						bcRFF_POINTER | bcRFF_TRANSIENT ),
-	BCREFLECTION_MEMBER( BcU32,								RefCount_,						bcRFF_DEFAULT | bcRFF_TRANSIENT ),
-BCREFLECTION_DERIVED_END();
-*/
+void GaPawnComponent::StaticRegisterClass()
+{
+	ReRegisterClass< GaPawnComponent, Super >()
+		.addAttribute( new ScnComponentAttribute( 0 ) );
+}
 
 //////////////////////////////////////////////////////////////////////////
 // initialise

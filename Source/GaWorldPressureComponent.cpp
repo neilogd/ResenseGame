@@ -27,15 +27,11 @@
 // Define
 DEFINE_RESOURCE( GaWorldPressureComponent );
 
-BCREFLECTION_EMPTY_REGISTER( GaWorldPressureComponent );
-/*
-BCREFLECTION_DERIVED_BEGIN( ScnComponent, GaWorldPressureComponent )
-	BCREFLECTION_MEMBER( BcName,							Name_,							bcRFF_DEFAULT | bcRFF_TRANSIENT ),
-	BCREFLECTION_MEMBER( BcU32,								Index_,							bcRFF_DEFAULT | bcRFF_TRANSIENT ),
-	BCREFLECTION_MEMBER( CsPackage,							pPackage_,						bcRFF_POINTER | bcRFF_TRANSIENT ),
-	BCREFLECTION_MEMBER( BcU32,								RefCount_,						bcRFF_DEFAULT | bcRFF_TRANSIENT ),
-BCREFLECTION_DERIVED_END();
-*/
+void GaWorldPressureComponent::StaticRegisterClass()
+{
+	ReRegisterClass< GaWorldPressureComponent, Super >()
+		.addAttribute( new ScnComponentAttribute( 0 ) );
+}
 
 //////////////////////////////////////////////////////////////////////////
 // initialise

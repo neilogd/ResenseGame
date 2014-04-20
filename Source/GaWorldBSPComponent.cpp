@@ -34,15 +34,11 @@ static BcVec2d RoundVector( BcVec2d Vector )
 // Define
 DEFINE_RESOURCE( GaWorldBSPComponent );
 
-BCREFLECTION_EMPTY_REGISTER( GaWorldBSPComponent );
-/*
-BCREFLECTION_DERIVED_BEGIN( ScnComponent, GaWorldBSPComponent )
-	BCREFLECTION_MEMBER( BcName,							Name_,							bcRFF_DEFAULT | bcRFF_TRANSIENT ),
-	BCREFLECTION_MEMBER( BcU32,								Index_,							bcRFF_DEFAULT | bcRFF_TRANSIENT ),
-	BCREFLECTION_MEMBER( CsPackage,							pPackage_,						bcRFF_POINTER | bcRFF_TRANSIENT ),
-	BCREFLECTION_MEMBER( BcU32,								RefCount_,						bcRFF_DEFAULT | bcRFF_TRANSIENT ),
-BCREFLECTION_DERIVED_END();
-*/
+void GaWorldBSPComponent::StaticRegisterClass()
+{
+	ReRegisterClass< GaWorldBSPComponent, Super >()
+		.addAttribute( new ScnComponentAttribute( 0 ) );
+}
 
 //////////////////////////////////////////////////////////////////////////
 // initialise
