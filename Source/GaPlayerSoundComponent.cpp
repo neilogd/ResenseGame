@@ -277,17 +277,17 @@ void GaPlayerSoundComponent::process( BcU32 NoofFrames, BcF32* pFrames )
 	aptk::LowpassRes< BcF32, BcF32 > LowPassCurrR;
 
 	// Copy over the filter data.
-	FilterLock_.lock();
-	LowPassPrevL = LowPassPrevL_;
-	LowPassPrevR = LowPassPrevR_;
-	LowPassCurrL = LowPassCurrL_;
-	LowPassCurrR = LowPassCurrR_;
+	{
+		std::lock_guard< std::mutex > Lock( FilterLock_ );
+		LowPassPrevL = LowPassPrevL_;
+		LowPassPrevR = LowPassPrevR_;
+		LowPassCurrL = LowPassCurrL_;
+		LowPassCurrR = LowPassCurrR_;
 
-	// Set previous for next time round.
-	LowPassPrevL_ = LowPassCurrL_;
-	LowPassPrevR_ = LowPassCurrR_;
-
-	FilterLock_.unlock();
+		// Set previous for next time round.
+		LowPassPrevL_ = LowPassCurrL_;
+		LowPassPrevR_ = LowPassCurrR_;
+	}
 
 	BcF32 LerpValue = 0.0f;
 	BcF32 LerpStep = 1.0f / (BcF32)NoofFrames;
@@ -316,10 +316,9 @@ void GaPlayerSoundComponent::process( BcU32 NoofFrames, BcF32* pFrames )
 // onReset
 eEvtReturn GaPlayerSoundComponent::onReset( EvtID ID, const GaWorldResetEvent& Event )
 {
-	FilterLock_.lock();
+	std::lock_guard< std::mutex > Lock( FilterLock_ );
 	LowPassCurrL_.setup( (BcF32)SampleRate_ / 4.0f, 0.0f, (BcF32)SampleRate_ );
 	LowPassCurrR_.setup( (BcF32)SampleRate_ / 4.0f, 0.0f, (BcF32)SampleRate_ );
-	FilterLock_.unlock();
 	DoneReset_ = 8;
 
 	return evtRET_PASS;

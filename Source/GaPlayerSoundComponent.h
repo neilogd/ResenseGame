@@ -73,7 +73,7 @@ private:
 
 	BcRandom							NoiseGenerator_;
 	
-	BcAtomicMutex						FilterLock_;
+	std::mutex							FilterLock_;
 
 	// Game thread.
 	aptk::LowpassRes< BcF32, BcF32 >	LowPassPrevL_;

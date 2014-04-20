@@ -12,14 +12,17 @@ solution "Psybrus"
 	configurations { "Debug", "Release", "Production", "Debug Profiling", "Release Profiling", "Production Profiling" }
 	platforms { "native", "x32", "x64" }
 
+	configuration { "native" }
+		openal32LibPath = psybrusSDK .. "/External/openal/libs/Win32/"
+
 	configuration { "x32" }
 		openal32LibPath = psybrusSDK .. "/External/openal/libs/Win32/"
 
-	configuration { "x64" }
-		openal32LibPath = psybrusSDK .. "/External/openal/libs/Win64/"
+--	configuration { "x64" }
+--		openal32LibPath = psybrusSDK .. "/External/openal/libs/Win64/"
 
 	configuration "vs*"
-		defines { "STATICLIB", "_CRT_SECURE_NO_WARNINGS", "_STATIC_CPPLIB", "_HAS_EXCEPTIONS=0" }	
+		defines { "STATICLIB", "_CRT_SECURE_NO_WARNINGS", "_STATIC_CPPLIB" }	
 
 	configuration "Debug"
 		targetdir ( "Build/" .. action .. "/bin/Debug" )
