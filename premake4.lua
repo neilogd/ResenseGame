@@ -10,6 +10,13 @@ boostLib = boostRoot .. "/lib"
 solution "Psybrus"
 	location ( "Build/" .. action )
 	configurations { "Debug", "Release", "Production", "Debug Profiling", "Release Profiling", "Production Profiling" }
+	platforms { "native", "x32", "x64" }
+
+	configuration { "x32" }
+		openal32LibPath = psybrusSDK .. "/External/openal/libs/Win32/"
+
+	configuration { "x64" }
+		openal32LibPath = psybrusSDK .. "/External/openal/libs/Win64/"
 
 	configuration "vs*"
 		defines { "STATICLIB", "_CRT_SECURE_NO_WARNINGS", "_STATIC_CPPLIB", "_HAS_EXCEPTIONS=0" }	
@@ -17,32 +24,32 @@ solution "Psybrus"
 	configuration "Debug"
 		targetdir ( "Build/" .. action .. "/bin/Debug" )
 		defines { "STATICLIB", "WINDOWS", "_WIN32", "WIN32", "DEBUG", "PSY_DEBUG", "PSY_SERVER" }
-		flags { "StaticRuntime", "EnableSSE", "EnableSSE2", "FloatFast", "NativeWChar", "NoPCH", "Symbols" }
+		flags { "StaticRuntime", "FloatFast", "NativeWChar", "NoPCH", "Symbols" }
 
 	configuration "Release"
 		targetdir ( "Build/" .. action .. "/bin/Release" )
 		defines { "STATICLIB", "WINDOWS", "_WIN32", "WIN32", "NDEBUG", "PSY_RELEASE", "PSY_SERVER" }
-		flags { "StaticRuntime", "EnableSSE", "EnableSSE2", "FloatFast", "NativeWChar", "NoPCH", "Symbols", "Optimize" }
+		flags { "StaticRuntime", "FloatFast", "NativeWChar", "NoPCH", "Symbols", "Optimize" }
 
 	configuration "Production"
 		targetdir ( "Build/" .. action .. "/bin/Production" )
 		defines { "STATICLIB", "WINDOWS", "_WIN32", "WIN32", "NDEBUG", "PSY_PRODUCTION" }
-		flags { "StaticRuntime", "EnableSSE", "EnableSSE2", "FloatFast", "NativeWChar", "NoPCH", "NoFramePointer", "Optimize" }
+		flags { "StaticRuntime", "FloatFast", "NativeWChar", "NoPCH", "NoFramePointer", "Optimize" }
 
 	configuration "Debug Profiling"
 		targetdir ( "Build/" .. action .. "/bin/DebugProfiling" )
 		defines { "STATICLIB", "WINDOWS", "_WIN32", "WIN32", "DEBUG", "PSY_DEBUG", "PSY_SERVER", "PSY_USE_PROFILER=1" }
-		flags { "StaticRuntime", "EnableSSE", "EnableSSE2", "FloatFast", "NativeWChar", "NoPCH", "Symbols" }
+		flags { "StaticRuntime", "FloatFast", "NativeWChar", "NoPCH", "Symbols" }
 
 	configuration "Release Profiling"
 		targetdir ( "Build/" .. action .. "/bin/ReleaseProfiling" )
 		defines { "STATICLIB", "WINDOWS", "_WIN32", "WIN32", "NDEBUG", "PSY_RELEASE", "PSY_SERVER", "PSY_USE_PROFILER=1" }
-		flags { "StaticRuntime", "EnableSSE", "EnableSSE2", "FloatFast", "NativeWChar", "NoPCH", "Symbols", "Optimize" }
+		flags { "StaticRuntime", "FloatFast", "NativeWChar", "NoPCH", "Symbols", "Optimize" }
 
 	configuration "Production Profiling"
 		targetdir ( "Build/" .. action .. "/bin/ProductionProfiling" )
 		defines { "STATICLIB", "WINDOWS", "_WIN32", "WIN32", "NDEBUG", "PSY_PRODUCTION", "PSY_USE_PROFILER=1" }
-		flags { "StaticRuntime", "EnableSSE", "EnableSSE2", "FloatFast", "NativeWChar", "NoPCH", "NoFramePointer", "Optimize" }
+		flags { "StaticRuntime", "FloatFast", "NativeWChar", "NoPCH", "NoFramePointer", "Optimize" }
 
 	-- Build externals.
 	dofile (psybrusSDK .. "/External/premake4.lua")
