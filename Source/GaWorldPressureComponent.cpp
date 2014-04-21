@@ -30,7 +30,7 @@ DEFINE_RESOURCE( GaWorldPressureComponent );
 void GaWorldPressureComponent::StaticRegisterClass()
 {
 	ReRegisterClass< GaWorldPressureComponent, Super >()
-		.addAttribute( new ScnComponentAttribute( 0 ) );
+		.addAttribute( new ScnComponentAttribute( 2 ) );
 }
 
 //////////////////////////////////////////////////////////////////////////

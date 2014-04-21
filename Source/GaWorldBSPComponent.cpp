@@ -37,7 +37,7 @@ DEFINE_RESOURCE( GaWorldBSPComponent );
 void GaWorldBSPComponent::StaticRegisterClass()
 {
 	ReRegisterClass< GaWorldBSPComponent, Super >()
-		.addAttribute( new ScnComponentAttribute( 0 ) );
+		.addAttribute( new ScnComponentAttribute( 1 ) );
 }
 
 //////////////////////////////////////////////////////////////////////////
