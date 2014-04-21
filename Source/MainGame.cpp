@@ -53,24 +53,11 @@ void PsyLaunchGame()
 // PsyGameRegisterResources
 void PsyGameRegisterResources()
 {
-	CsCore::pImpl()->registerResource< GaWorldInfoComponent >();
-	CsCore::pImpl()->registerResource< GaWorldBSPComponent >();
-	CsCore::pImpl()->registerResource< GaWorldPressureComponent >();
-	CsCore::pImpl()->registerResource< GaEnemyComponent >();
-	CsCore::pImpl()->registerResource< GaPlayerComponent >();
-	CsCore::pImpl()->registerResource< GaPlayerSoundComponent >();
-	CsCore::pImpl()->registerResource< GaPawnComponent >();
-}
-
-//////////////////////////////////////////////////////////////////////////
-// PsyGameUnRegisterResources
-void PsyGameUnRegisterResources()
-{
-	CsCore::pImpl()->unregisterResource< GaWorldInfoComponent >();
-	CsCore::pImpl()->unregisterResource< GaWorldBSPComponent >();
-	CsCore::pImpl()->unregisterResource< GaWorldPressureComponent >();
-	CsCore::pImpl()->unregisterResource< GaEnemyComponent >();
-	CsCore::pImpl()->unregisterResource< GaPlayerComponent >();
-	CsCore::pImpl()->unregisterResource< GaPlayerSoundComponent >();
-	CsCore::pImpl()->unregisterResource< GaPawnComponent >();
+	GaWorldInfoComponent::StaticRegisterClass();
+	GaWorldBSPComponent::StaticRegisterClass();
+	GaWorldPressureComponent::StaticRegisterClass();
+	GaEnemyComponent::StaticRegisterClass();
+	GaPlayerComponent::StaticRegisterClass();
+	GaPlayerSoundComponent::StaticRegisterClass();
+	GaPawnComponent::StaticRegisterClass();
 }
