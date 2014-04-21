@@ -2,10 +2,11 @@ project "ResenseGame"
 	kind "WindowedApp"
 	language "C++"
 	files { "./**.hh", "./**.h", "./**.c", "./**.cpp" }
+   debugdir "../Dist"
    includedirs { 
       "./", 
-      "../../Psybrus/Engine/Source/Shared/", 
-      "../../Psybrus/Engine/Source/Platforms/Windows/"
+      psybrusSDK .. "/Engine/Source/Shared/", 
+      psybrusSDK .. "/Engine/Source/Platforms/Windows/"
    }
 
 	-- External includes.
@@ -30,20 +31,8 @@ project "ResenseGame"
             "OpenAL32",
 
    			-- External libs.
-   			"External_freetype",
-   			"External_glew",
-   			"External_jsoncpp",
-   			"External_libb64",
-            "External_mongoose",
-   			"External_ogg",
-            "External_pcre",
-   			"External_png",
             "External_portaudio",
-   			"External_squish",
-   			"External_tremor",
-   			"External_zlib",
 
    			-- Engine libs.
-   			"Engine_Shared",
-   			"Engine_Windows",
+   			"Engine",
    		}
