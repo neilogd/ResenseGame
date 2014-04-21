@@ -38,7 +38,7 @@ public:
 	virtual void						onAttach( ScnEntityWeakRef Parent );
 	virtual void						onDetach( ScnEntityWeakRef Parent );
 
-	BcVec3d								findLongestDirection();
+	MaVec3d								findLongestDirection();
 	
 private:
 	ScnCanvasComponentRef				Canvas_;
@@ -46,7 +46,7 @@ private:
 	GaWorldPressureComponentRef			Pressure_;
 	GaPawnComponentRef					Pawn_;
 
-	BcVec3d								Direction_;
+	MaVec3d								Direction_;
 
 	BcF32								PulseTimer_;
 

@@ -13,7 +13,7 @@
 
 #include "GaPlayerComponent.h"
 
-#include "Base/BcBSPTree.h"
+#include "Math/MaBSPTree.h"
 #include "Base/BcMath.h"
 
 #include "System/Os/OsCore.h"
@@ -60,17 +60,17 @@ void GaPlayerComponent::update( BcF32 Tick )
 	Yaw_ += -MouseDelta_.x() * Tick * 0.1f;
 	Pitch_ += -MouseDelta_.y() * Tick * 0.1f;
 	Pitch_ = BcClamp( Pitch_, -BcPIDIV2 + ( BcPIDIV2 * 0.125f ), BcPIDIV2 - ( BcPIDIV2 * 0.125f ) );
-	MouseDelta_ = BcVec2d( 0.0f, 0.0f );
+	MouseDelta_ = MaVec2d( 0.0f, 0.0f );
 
 	BcF32 RotationSpeed = 1.0f * Tick;
 	BcF32 MoveSpeed = DoRun_ ? 4.0f : 2.0f;
 	BcF32 MoveDirection = 0.0f;
-	BcVec3d ViewVector = BcVec3d( 1.0f, 0.0f, 0.0f );
-	BcMat4d RotationMatrix;
-	RotationMatrix.rotation( BcVec3d( 0.0f, Pitch_, Yaw_ ) );
+	MaVec3d ViewVector = MaVec3d( 1.0f, 0.0f, 0.0f );
+	MaMat4d RotationMatrix;
+	RotationMatrix.rotation( MaVec3d( 0.0f, Pitch_, Yaw_ ) );
 	ViewVector = ViewVector * RotationMatrix;
-	BcVec3d SideVector = ViewVector.cross( BcVec3d( 0.0f, 0.0f, 1.0f ) );
-	BcVec3d MoveVector;
+	MaVec3d SideVector = ViewVector.cross( MaVec3d( 0.0f, 0.0f, 1.0f ) );
+	MaVec3d MoveVector;
 
 	if( MoveForward_ )
 	{
@@ -102,7 +102,7 @@ void GaPlayerComponent::update( BcF32 Tick )
 	{
 		if( ShotTick_ >= RateOfShot_ )
 		{
-			BcVec3d ImpactPosition = doShot( ViewVector, 0.1f, 4.0f, 32.0f );
+			MaVec3d ImpactPosition = doShot( ViewVector, 0.1f, 4.0f, 32.0f );
 			if( BSP_->killEnemy( ImpactPosition, 4.0f ) )
 			{
 				Pressure_->setSample( ImpactPosition, -512.0f );
@@ -126,20 +126,20 @@ void GaPlayerComponent::update( BcF32 Tick )
 	}
 	
 	// Set the move.
-	BcVec3d AppliedMoveVector = MoveVector;
+	MaVec3d AppliedMoveVector = MoveVector;
 	AppliedMoveVector.z( 0.0f );
 	AppliedMoveVector = AppliedMoveVector.normal() * MoveSpeed;
 	Pawn_->setMove( AppliedMoveVector );
 
 	// Set look at.
-	BcMat4d Transform;
-	Transform.lookAt( BcVec3d( 0.0f, 0.0f, 0.0f ), ViewVector, BcVec3d( 0.0f, 0.0f, 1.0f ) );
+	MaMat4d Transform;
+	Transform.lookAt( MaVec3d( 0.0f, 0.0f, 0.0f ), ViewVector, MaVec3d( 0.0f, 0.0f, 1.0f ) );
 	Transform.inverse();
 	getParentEntity()->setLocalMatrix( Transform );
 
 	// Setup ears.
-	BcVec3d EarLVector = BcVec3d( 1.0f, 0.0f, 0.0f );
-	BcVec3d EarRVector = BcVec3d( 1.0f, 0.0f, 0.0f );
+	MaVec3d EarLVector = MaVec3d( 1.0f, 0.0f, 0.0f );
+	MaVec3d EarRVector = MaVec3d( 1.0f, 0.0f, 0.0f );
 	BcF32 Offset = 0.0f;
 	for( BcU32 Idx = 0; Idx < 4; ++Idx )
 	{
@@ -245,7 +245,7 @@ eEvtReturn GaPlayerComponent::onKeyboardEvent( EvtID ID, const OsEventInputKeybo
 			break;
 
 		case OsEventInputKeyboard::KEYCODE_SPACE:
-			//Pawn_->setPosition( BcVec3d( 0.0f, 0.0f, 0.0f ) );
+			//Pawn_->setPosition( MaVec3d( 0.0f, 0.0f, 0.0f ) );
 			break;
 
 		case OsEventInputKeyboard::KEYCODE_ESCAPE:
@@ -292,10 +292,10 @@ eEvtReturn GaPlayerComponent::onMouseEvent( EvtID ID, const OsEventInputMouse& E
 
 //////////////////////////////////////////////////////////////////////////
 // doShot
-BcVec3d GaPlayerComponent::doShot( const BcVec3d& Direction, BcF32 TrailPower, BcF32 MuzzlePower, BcF32 ImpactPower )
+MaVec3d GaPlayerComponent::doShot( const MaVec3d& Direction, BcF32 TrailPower, BcF32 MuzzlePower, BcF32 ImpactPower )
 {
-	BcVec3d Position = getParentEntity()->getWorldPosition();
-	BcVec3d Target = Position + Direction * 256.0f;
+	MaVec3d Position = getParentEntity()->getWorldPosition();
+	MaVec3d Target = Position + Direction * 256.0f;
 
 	BcBSPPointInfo BSPPointInfo;
 	if( BSP_->lineIntersection( Position, Target, &BSPPointInfo ) )
@@ -304,8 +304,8 @@ BcVec3d GaPlayerComponent::doShot( const BcVec3d& Direction, BcF32 TrailPower, B
 	}
 	else
 	{
-		BcPlane Floor( BcVec3d( 0.0f, 0.0f,  1.0f ), 4.0f );
-		BcPlane Ceil( BcVec3d( 0.0f, 0.0f, -1.0f ), 4.0f );
+		MaPlane Floor( MaVec3d( 0.0f, 0.0f,  1.0f ), 4.0f );
+		MaPlane Ceil( MaVec3d( 0.0f, 0.0f, -1.0f ), 4.0f );
 		BcF32 Dist;
 		Floor.lineIntersection( Position, Target, Dist, BSPPointInfo.Point_ );
 		Ceil.lineIntersection( Position, Target, Dist, BSPPointInfo.Point_ );
@@ -324,8 +324,8 @@ BcVec3d GaPlayerComponent::doShot( const BcVec3d& Direction, BcF32 TrailPower, B
 
 	// Trace a line through the scene.
 	BcF32 Distance = ( BSPPointInfo.Point_ - Position ).magnitude() * 2.0f;
-	BcVec3d Point = Position;
-	BcVec3d StepVec = ( BSPPointInfo.Point_ - Position ) / Distance;
+	MaVec3d Point = Position;
+	MaVec3d StepVec = ( BSPPointInfo.Point_ - Position ) / Distance;
 	for( BcU32 Idx = 0; Idx < BcU32( Distance ); ++Idx )
 	{
 		Pressure_->setSample( Point, TrailPower );

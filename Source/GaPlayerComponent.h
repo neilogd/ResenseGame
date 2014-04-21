@@ -44,7 +44,7 @@ public:
 	eEvtReturn							onMouseEvent( EvtID ID, const OsEventInputMouse& Event );
 	eEvtReturn							onReset( EvtID ID, const GaWorldResetEvent& Event );
 
-	BcVec3d								doShot( const BcVec3d& Direction, BcF32 TrailPower, BcF32 MuzzlePower, BcF32 ImpactPower );
+	MaVec3d								doShot( const MaVec3d& Direction, BcF32 TrailPower, BcF32 MuzzlePower, BcF32 ImpactPower );
 	
 public:
 	BcBool								MoveForward_;
@@ -62,11 +62,11 @@ public:
 	BcF32								Yaw_;
 	BcF32								Pitch_;
 
-	BcVec2d								MouseDelta_;
+	MaVec2d								MouseDelta_;
 
-	BcVec3d								LastViewVector_;
-	BcVec3d								EarLVectors_[4];
-	BcVec3d								EarRVectors_[4];
+	MaVec3d								LastViewVector_;
+	MaVec3d								EarLVectors_[4];
+	MaVec3d								EarRVectors_[4];
 	
 	ScnCanvasComponentRef				Canvas_;
 	GaWorldBSPComponentRef				BSP_;

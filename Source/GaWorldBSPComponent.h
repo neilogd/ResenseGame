@@ -31,7 +31,7 @@ typedef ReObjectRef< class GaWorldBSPComponent > GaWorldBSPComponentRef;
 // GaWorldBSPPoint
 struct GaWorldBSPPoint
 {
-	BcVec2d Position_;
+	MaVec2d Position_;
 };
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -49,7 +49,7 @@ enum GaEvents
 // GaWorldResetEvent
 struct GaWorldResetEvent: EvtEvent< GaWorldResetEvent >
 {
-	BcVec2d Position_;
+	MaVec2d Position_;
 	BcBool HasWeapon_;
 };
 
@@ -100,10 +100,10 @@ public:
 	eEvtReturn							onKeyboardEvent( EvtID ID, const OsEventInputKeyboard& Event );
 	eEvtReturn							onMouseEvent( EvtID ID, const OsEventInputMouse& Event );
 
-	BcU32								nearestPoint( BcVec2d Position, BcF32 Radius );
-	BcU32								addPoint( BcVec2d Position );
+	BcU32								nearestPoint( MaVec2d Position, BcF32 Radius );
+	BcU32								addPoint( MaVec2d Position );
 	BcBool								addEdge( BcU32 IdxA, BcU32 IdxB );
-	BcBool								addEnemy( const BcVec2d& Position );
+	BcBool								addEnemy( const MaVec2d& Position );
 
 	void								removePoint( BcU32 Idx );
 	void								removeEdge( BcU32 Idx );
@@ -111,14 +111,14 @@ public:
 
 	void								invertEdge( BcU32 Idx );
 
-	BcU32								nearestEdge( const BcVec2d& Position, BcF32 Radius );
-	BcVec2d								nearestPositionOnEdge( const BcVec2d& Position, BcU32 Idx );
-	BcU32								nearestEnemy( BcVec2d Position, BcF32 Radius );
+	BcU32								nearestEdge( const MaVec2d& Position, BcF32 Radius );
+	MaVec2d								nearestPositionOnEdge( const MaVec2d& Position, BcU32 Idx );
+	BcU32								nearestEnemy( MaVec2d Position, BcF32 Radius );
 
-	BcBool								killEnemy( const BcVec3d& Position, BcF32 Radius );
+	BcBool								killEnemy( const MaVec3d& Position, BcF32 Radius );
 	void								killPlayer();
 
-	BcBool								canSeePlayer(const BcVec3d& From );
+	BcBool								canSeePlayer(const MaVec3d& From );
 
 	void								saveJson();
 	void								loadJson();
@@ -127,9 +127,9 @@ public:
 
 	void								buildBSP();
 
-	BcBool								checkPointFront( const BcVec3d& Point, BcF32 Radius, struct BcBSPInfo* pData = NULL, struct BcBSPNode* pNode = NULL );
-	BcBool								checkPointBack( const BcVec3d& Point, BcF32 Radius, struct BcBSPInfo* pData = NULL, struct BcBSPNode* pNode = NULL );
-	BcBool								lineIntersection( const BcVec3d& A, const BcVec3d& B, struct BcBSPPointInfo* pPointInfo, struct BcBSPNode* pNode = NULL );
+	BcBool								checkPointFront( const MaVec3d& Point, BcF32 Radius, struct MaBSPInfo* pData = NULL, struct MaBSPNode* pNode = NULL );
+	BcBool								checkPointBack( const MaVec3d& Point, BcF32 Radius, struct MaBSPInfo* pData = NULL, struct MaBSPNode* pNode = NULL );
+	BcBool								lineIntersection( const MaVec3d& A, const MaVec3d& B, struct BcBSPPointInfo* pPointInfo, struct MaBSPNode* pNode = NULL );
 
 	void								clearMessages();
 	void								addMessage( const BcChar* pMessage );
@@ -155,27 +155,27 @@ public:
 	ScnFontComponentRef					Font_;
 	BcU32								FontScaleParam_;
 	
-	BcMat4d								Projection_;
+	MaMat4d								Projection_;
 
 	std::vector< GaWorldBSPPoint >		Points_;
 	std::vector< GaWorldBSPEdge >		Edges_;
-	std::vector< BcVec2d >				Enemies_;
+	std::vector< MaVec2d >				Enemies_;
 	std::vector< ScnEntityRef >			EnemyEntities_;
 	ScnEntityRef						PlayerEntity_;
 
-	BcVec2d								StartPosition_;
-	BcVec2d								QuitPosition_;
+	MaVec2d								StartPosition_;
+	MaVec2d								QuitPosition_;
 
 	BcU32								LastPointIdx_;
 
-	BcVec2d								MousePosition_;
-	BcVec2d								MousePointPosition_;
+	MaVec2d								MousePosition_;
+	MaVec2d								MousePointPosition_;
 
 	BcU32								NearestPoint_;
 	BcU32								NearestEdge_;
 	BcU32								NearestEnemy_;
 
-	class BcBSPTree*					pBSPTree_;
+	class MaBSPTree*					pBSPTree_;
 
 	GaWorldBSPVertex*					pVertexArray_;
 	RsVertexBuffer*						pVertexBuffer_;

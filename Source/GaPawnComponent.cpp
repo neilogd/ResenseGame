@@ -13,7 +13,7 @@
 
 #include "GaPawnComponent.h"
 
-#include "Base/BcBSPTree.h"
+#include "Math/MaBSPTree.h"
 
 #include "System/Os/OsCore.h"
 
@@ -33,8 +33,8 @@ void GaPawnComponent::initialise( const Json::Value& Object )
 {
 	Super::initialise();
 	
-	Position_ = BcVec3d( 0.0f, 0.0f, 0.0f );
-	MoveDirection_ = BcVec3d( 0.0f, 0.0f, 0.0f );
+	Position_ = MaVec3d( 0.0f, 0.0f, 0.0f );
+	MoveDirection_ = MaVec3d( 0.0f, 0.0f, 0.0f );
 
 }
 
@@ -43,25 +43,25 @@ void GaPawnComponent::initialise( const Json::Value& Object )
 //virtual
 void GaPawnComponent::update( BcF32 Tick )
 {
-	BcBSPInfo BSPInfo;
-	BcVec3d TargetPosition = Position_;
+	MaBSPInfo BSPInfo;
+	MaVec3d TargetPosition = Position_;
 	BcF32 RotationSpeed = 1.0f * Tick;
 	BcF32 MoveSpeed = MoveDirection_.magnitude();
-	BcVec3d MoveVector = MoveDirection_.normal();
-	BcVec3d SideVector = BcVec3d( 0.0f, 0.0f, 1.0f ).cross( MoveVector );
+	MaVec3d MoveVector = MoveDirection_.normal();
+	MaVec3d SideVector = MaVec3d( 0.0f, 0.0f, 1.0f ).cross( MoveVector );
 	BcF32 MoveDirection = 0.0f;
 	BcF32 PlayerRadius = 0.25f;
 	BcF32 LineCheckRadius = 0.75f;
 
 	// Collide against walls.
-	BcVec3d AppliedMoveVector = MoveVector * MoveSpeed * Tick;
-	BcVec3d RadiusMoveVector = MoveVector * LineCheckRadius;
+	MaVec3d AppliedMoveVector = MoveVector * MoveSpeed * Tick;
+	MaVec3d RadiusMoveVector = MoveVector * LineCheckRadius;
 	
 	// Debug draw:
 	if( BSP_->InEditorMode_ )
 	{
-		BcVec2d Position2D = BcVec2d( Position_.x(), Position_.y() );
-		BcVec2d BoxSize2D = BcVec2d( PlayerRadius, PlayerRadius );
+		MaVec2d Position2D = MaVec2d( Position_.x(), Position_.y() );
+		MaVec2d BoxSize2D = MaVec2d( PlayerRadius, PlayerRadius );
 		Canvas_->drawLineBox( Position2D - BoxSize2D, Position2D + BoxSize2D, RsColour::GREEN, 10 );
 	}
 
@@ -71,9 +71,9 @@ void GaPawnComponent::update( BcF32 Tick )
 		BcU32 Tries = 3;
 		do
 		{
-			BcVec3d SidePositionA = ( Position_ - SideVector * PlayerRadius );
-			BcVec3d SidePositionB = ( Position_ + SideVector * PlayerRadius );
-			BcVec3d SidePositionC = ( Position_ + MoveVector * PlayerRadius );
+			MaVec3d SidePositionA = ( Position_ - SideVector * PlayerRadius );
+			MaVec3d SidePositionB = ( Position_ + SideVector * PlayerRadius );
+			MaVec3d SidePositionC = ( Position_ + MoveVector * PlayerRadius );
 			BcBSPPointInfo BSPPointInfoA;
 			BcBSPPointInfo BSPPointInfoB;
 			BcBSPPointInfo BSPPointInfoC;
@@ -83,28 +83,28 @@ void GaPawnComponent::update( BcF32 Tick )
 
 			if( BSP_->InEditorMode_ )
 			{
-				Canvas_->drawLine( BcVec2d( SidePositionA.x(), SidePositionA.y() ), BcVec2d( BSPPointInfoA.Point_.x(), BSPPointInfoA.Point_.y() ), RsColour::GREEN, 10 );
-				Canvas_->drawLine( BcVec2d( SidePositionB.x(), SidePositionB.y() ), BcVec2d( BSPPointInfoB.Point_.x(), BSPPointInfoB.Point_.y() ), RsColour::GREEN, 10 );
-				Canvas_->drawLine( BcVec2d( SidePositionC.x(), SidePositionC.y() ), BcVec2d( BSPPointInfoC.Point_.x(), BSPPointInfoC.Point_.y() ), RsColour::GREEN, 10 );
+				Canvas_->drawLine( MaVec2d( SidePositionA.x(), SidePositionA.y() ), MaVec2d( BSPPointInfoA.Point_.x(), BSPPointInfoA.Point_.y() ), RsColour::GREEN, 10 );
+				Canvas_->drawLine( MaVec2d( SidePositionB.x(), SidePositionB.y() ), MaVec2d( BSPPointInfoB.Point_.x(), BSPPointInfoB.Point_.y() ), RsColour::GREEN, 10 );
+				Canvas_->drawLine( MaVec2d( SidePositionC.x(), SidePositionC.y() ), MaVec2d( BSPPointInfoC.Point_.x(), BSPPointInfoC.Point_.y() ), RsColour::GREEN, 10 );
 			}
 		
 			if( PointAIntersection )
 			{
-				BcVec3d Normal = BSPPointInfoA.Plane_.normal();
+				MaVec3d Normal = BSPPointInfoA.Plane_.normal();
 				BcF32 MoveAwaySpeed = AppliedMoveVector.dot( Normal );
 				AppliedMoveVector -= Normal * MoveAwaySpeed * 1.001f;
 			}
 
 			if( PointBIntersection )
 			{
-				BcVec3d Normal = BSPPointInfoB.Plane_.normal();
+				MaVec3d Normal = BSPPointInfoB.Plane_.normal();
 				BcF32 MoveAwaySpeed = AppliedMoveVector.dot( Normal );
 				AppliedMoveVector -= Normal * MoveAwaySpeed * 1.001f;
 			}
 
 			if( PointCIntersection )
 			{
-				BcVec3d Normal = BSPPointInfoC.Plane_.normal();
+				MaVec3d Normal = BSPPointInfoC.Plane_.normal();
 				BcF32 MoveAwaySpeed = AppliedMoveVector.dot( Normal );
 				AppliedMoveVector -= Normal * MoveAwaySpeed * 1.001f;
 			}
@@ -162,14 +162,14 @@ void GaPawnComponent::onDetach( ScnEntityWeakRef Parent )
 
 //////////////////////////////////////////////////////////////////////////
 // setPosition
-void GaPawnComponent::setPosition( const BcVec3d& Position )
+void GaPawnComponent::setPosition( const MaVec3d& Position )
 {
 	Position_ = Position;
 }
 
 //////////////////////////////////////////////////////////////////////////
 // setMove
-void GaPawnComponent::setMove( const BcVec3d& MoveDirection )
+void GaPawnComponent::setMove( const MaVec3d& MoveDirection )
 {
  	MoveDirection_ = MoveDirection;
 }

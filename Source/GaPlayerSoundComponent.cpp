@@ -13,7 +13,7 @@
 
 #include "GaPlayerSoundComponent.h"
 
-#include "Base/BcBSPTree.h"
+#include "Math/MaBSPTree.h"
 #include "Base/BcMath.h"
 
 //////////////////////////////////////////////////////////////////////////
@@ -87,11 +87,11 @@ void GaPlayerSoundComponent::update( BcF32 Tick )
 	BcF32 MaxDistanceR = 0.0f;
 	for( BcU32 Idx = 0; Idx < 4; ++Idx )
 	{
-		BcVec3d RayVectorL = Player_->EarLVectors_[ Idx ];
-		BcVec3d RayVectorR = Player_->EarRVectors_[ Idx ];
+		MaVec3d RayVectorL = Player_->EarLVectors_[ Idx ];
+		MaVec3d RayVectorR = Player_->EarRVectors_[ Idx ];
 	
-		BcVec3d IntersectionL = intersection( RayVectorL );
-		BcVec3d IntersectionR = intersection( RayVectorR );
+		MaVec3d IntersectionL = intersection( RayVectorL );
+		MaVec3d IntersectionR = intersection( RayVectorR );
 		DistanceL += ( IntersectionL - getParentEntity()->getWorldPosition() ).magnitude();
 		DistanceR += ( IntersectionR - getParentEntity()->getWorldPosition() ).magnitude();
 
@@ -216,10 +216,10 @@ void GaPlayerSoundComponent::onDetach( ScnEntityWeakRef Parent )
 
 //////////////////////////////////////////////////////////////////////////
 // intersection
-BcVec3d GaPlayerSoundComponent::intersection( const BcVec3d& Direction )
+MaVec3d GaPlayerSoundComponent::intersection( const MaVec3d& Direction )
 {
-	BcVec3d Position = getParentEntity()->getWorldPosition();
-	BcVec3d Target = Position + Direction * 256.0f;
+	MaVec3d Position = getParentEntity()->getWorldPosition();
+	MaVec3d Target = Position + Direction * 256.0f;
 	BcBSPPointInfo BSPPointInfo;
 	if( BSP_->lineIntersection( Position, Target, &BSPPointInfo ) )
 	{
@@ -227,8 +227,8 @@ BcVec3d GaPlayerSoundComponent::intersection( const BcVec3d& Direction )
 	}
 	else
 	{
-		BcPlane Floor( BcVec3d( 0.0f, 0.0f,  1.0f ), 4.0f );
-		BcPlane Ceil( BcVec3d( 0.0f, 0.0f, -1.0f ), 4.0f );
+		MaPlane Floor( MaVec3d( 0.0f, 0.0f,  1.0f ), 4.0f );
+		MaPlane Ceil( MaVec3d( 0.0f, 0.0f, -1.0f ), 4.0f );
 		BcF32 Dist;
 		Floor.lineIntersection( Position, Target, Dist, BSPPointInfo.Point_ );
 		Ceil.lineIntersection( Position, Target, Dist, BSPPointInfo.Point_ );
@@ -237,7 +237,7 @@ BcVec3d GaPlayerSoundComponent::intersection( const BcVec3d& Direction )
 
 	if( BSP_->InEditorMode_ )
 	{
-		Canvas_->drawLine( BcVec2d( Position.x(), Position.y() ), BcVec2d( BSPPointInfo.Point_.x(), BSPPointInfo.Point_.y() ), RsColour::GREEN, 10 );
+		Canvas_->drawLine( MaVec2d( Position.x(), Position.y() ), MaVec2d( BSPPointInfo.Point_.x(), BSPPointInfo.Point_.y() ), RsColour::GREEN, 10 );
 	}
 
 	return BSPPointInfo.Point_;

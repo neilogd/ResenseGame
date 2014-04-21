@@ -38,12 +38,12 @@ public:
 	virtual void						onAttach( ScnEntityWeakRef Parent );
 	virtual void						onDetach( ScnEntityWeakRef Parent );
 
-	void								setPosition( const BcVec3d& Position );
-	void								setMove( const BcVec3d& MoveDirection );
+	void								setPosition( const MaVec3d& Position );
+	void								setMove( const MaVec3d& MoveDirection );
 
 private:
-	BcVec3d								Position_;
-	BcVec3d								MoveDirection_;
+	MaVec3d								Position_;
+	MaVec3d								MoveDirection_;
 	
 	ScnCanvasComponentRef				Canvas_;
 	GaWorldBSPComponentRef				BSP_;

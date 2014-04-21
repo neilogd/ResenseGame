@@ -76,14 +76,14 @@ public:
 	virtual void						initialise( const Json::Value& Object );
 	virtual void						create__onAttach();
 	virtual void						destroy__onDetach();
-	virtual BcAABB						getAABB() const;
+	virtual MaAABB						getAABB() const;
 	virtual void						update( BcF32 Tick );
 	virtual void						render( class ScnViewComponent* pViewComponent, RsFrame* pFrame, RsRenderSort Sort );
 	virtual void						onAttach( ScnEntityWeakRef Parent );
 	virtual void						onDetach( ScnEntityWeakRef Parent );
 
-	void								addSample( const BcVec3d& Position, BcF32 Value );
-	void								setSample( const BcVec3d& Position, BcF32 Value );
+	void								addSample( const MaVec3d& Position, BcF32 Value );
+	void								setSample( const MaVec3d& Position, BcF32 Value );
 
 	eEvtReturn							onReset( EvtID ID, const GaWorldResetEvent& Event );
 
@@ -107,7 +107,7 @@ private:
 	BcF32								Damping_;
 
 	BcF32								Scale_;
-	BcVec2d								Offset_;
+	MaVec2d								Offset_;
 
 	GaWorldPressureSample*				pBuffers_[ 2 ];
 	BcU32								BufferSize_;

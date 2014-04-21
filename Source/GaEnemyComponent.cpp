@@ -13,7 +13,7 @@
 
 #include "GaEnemyComponent.h"
 
-#include "Base/BcBSPTree.h"
+#include "Math/MaBSPTree.h"
 #include "Base/BcMath.h"
 
 //////////////////////////////////////////////////////////////////////////
@@ -45,12 +45,12 @@ void GaEnemyComponent::update( BcF32 Tick )
 {
 	// Find move vector.
 	BcF32 MoveSpeed = 2.0f;
-	BcVec3d MoveVector;
+	MaVec3d MoveVector;
 
 	PulseTimer_ += Tick;
 
 	// Set direction and handle if we need to change direction.
-	BcVec3d Position = getParentEntity()->getWorldPosition();
+	MaVec3d Position = getParentEntity()->getWorldPosition();
 	MoveVector = Direction_;
 
 	BcBSPPointInfo BSPPointInfo;
@@ -65,7 +65,7 @@ void GaEnemyComponent::update( BcF32 Tick )
 			Direction_.normalise();
 			
 			// Clamp position (this is to prevent wandering, if angles aren't sitting on an integer, expect weirdness).
-			Position = BcVec3d( BcRound( Position.x() ), BcRound( Position.y() ), BcRound( Position.z() ) );
+			Position = MaVec3d( BcRound( Position.x() ), BcRound( Position.y() ), BcRound( Position.z() ) );
 
 		}
 	}
@@ -101,14 +101,14 @@ void GaEnemyComponent::update( BcF32 Tick )
 	// Set the move.
 	if( !IsTargetting_ )
 	{
-		BcVec3d AppliedMoveVector = MoveVector;
+		MaVec3d AppliedMoveVector = MoveVector;
 		AppliedMoveVector.z( 0.0f );
 		AppliedMoveVector = AppliedMoveVector.normal() * MoveSpeed;
 		Pawn_->setMove( AppliedMoveVector );
 	}
 	else
 	{
-		Pawn_->setMove( BcVec3d( 0.0f, 0.0f, 0.0f ) );
+		Pawn_->setMove( MaVec3d( 0.0f, 0.0f, 0.0f ) );
 	}
 }
 
@@ -149,20 +149,20 @@ void GaEnemyComponent::onDetach( ScnEntityWeakRef Parent )
 
 //////////////////////////////////////////////////////////////////////////
 // findLongestDirection
-BcVec3d GaEnemyComponent::findLongestDirection()
+MaVec3d GaEnemyComponent::findLongestDirection()
 {
 	// Ray cast in the 4 directions to determine path.
 	BcF32 LongestDistance = 0.0f;
-	BcVec3d LongestDirection( 0.0f, 0.0f, 0.0f );
-	BcVec3d Directions[] =
+	MaVec3d LongestDirection( 0.0f, 0.0f, 0.0f );
+	MaVec3d Directions[] =
 	{
-		BcVec3d(  1.0f,  0.0f,  0.0f ),
-		BcVec3d( -1.0f,  0.0f,  0.0f ),
-		BcVec3d(  0.0f,  1.0f,  0.0f ),
-		BcVec3d(  0.0f, -1.0f,  0.0f ),
+		MaVec3d(  1.0f,  0.0f,  0.0f ),
+		MaVec3d( -1.0f,  0.0f,  0.0f ),
+		MaVec3d(  0.0f,  1.0f,  0.0f ),
+		MaVec3d(  0.0f, -1.0f,  0.0f ),
 	};
 
-	BcVec3d Position = getParentEntity()->getWorldPosition();
+	MaVec3d Position = getParentEntity()->getWorldPosition();
 
 	BcBSPPointInfo BSPPointInfo;
 	for( BcU32 Idx = 0; Idx < 4; ++Idx )

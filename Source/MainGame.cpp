@@ -43,7 +43,7 @@ void PsyLaunchGame()
 	ScnEntitySpawnParams Params = 
 	{
 		"default", "EditorEntity", "WorldEntity_0",
-		BcMat4d(),
+		MaMat4d(),
 		NULL
 	};
 	ScnCore::pImpl()->spawnEntity( Params );

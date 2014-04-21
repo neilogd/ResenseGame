@@ -56,7 +56,7 @@ void GaWorldPressureComponent::create__onAttach()
 	Damping_ = WorldInfo_->getDamping() * WorldInfo_->getScale();
 
 	Scale_ = WorldInfo_->getScale();
-	Offset_ = BcVec2d( Width_ * Scale_, Height_ * Scale_ ) * -0.5f;
+	Offset_ = MaVec2d( Width_ * Scale_, Height_ * Scale_ ) * -0.5f;
 
 	// Allocate buffers.
 	BufferSize_ = Width_ * Height_ * Depth_;
@@ -277,9 +277,9 @@ void GaWorldPressureComponent::destroy__onDetach()
 //////////////////////////////////////////////////////////////////////////
 // getAABB
 //virtual
-BcAABB GaWorldPressureComponent::getAABB() const 
+MaAABB GaWorldPressureComponent::getAABB() const 
 {
-	return BcAABB();
+	return MaAABB();
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -317,13 +317,13 @@ void GaWorldPressureComponent::update( BcF32 Tick )
 	{
 		Canvas_->setMaterialComponent( DynamicMaterials_[ CurrMaterial_ ].PreviewMaterial_ );		// THIS FUCKS THE RENDER TARGET. WHY?
 																									// Look at deprecated calls in gDebugger, fix em.
-		BcVec2d HalfBoxSize( BcVec2d( (BcF32)Width_, (BcF32)Height_ ) * Scale_ * 0.5f );
+		MaVec2d HalfBoxSize( MaVec2d( (BcF32)Width_, (BcF32)Height_ ) * Scale_ * 0.5f );
 		Canvas_->drawBox( -HalfBoxSize, HalfBoxSize, RsColour( 1.0f, 1.0f, 1.0f, 1.0f ), 255 );
 	}
 	else
 	{
 		Canvas_->setMaterialComponent( ScreenRTMaterial_ );
-		BcVec2d HalfBoxSize( BcVec2d( 32.0f, -18.0f ) * 1.0f  );
+		MaVec2d HalfBoxSize( MaVec2d( 32.0f, -18.0f ) * 1.0f  );
 		Canvas_->drawBox( -HalfBoxSize, HalfBoxSize, RsColour( 1.0f, 1.0f, 1.0f, 1.0f ), 255 );
 	}
 }
@@ -354,7 +354,7 @@ void GaWorldPressureComponent::render( class ScnViewComponent* pViewComponent, R
 	// Bind material and flip it.
 	TDynamicMaterial& DynamicMaterial( DynamicMaterials_[ CurrMaterial_ ] );
 	CurrMaterial_ = 1 - CurrMaterial_;
-	DynamicMaterial.WorldMaterial_->setWorldTransform( BcMat4d() );
+	DynamicMaterial.WorldMaterial_->setWorldTransform( MaMat4d() );
 	pViewComponent->setMaterialParameters( DynamicMaterial.WorldMaterial_ );
 	DynamicMaterial.WorldMaterial_->bind( pFrame, Sort );
 
@@ -446,10 +446,10 @@ void GaWorldPressureComponent::onDetach( ScnEntityWeakRef Parent )
 
 //////////////////////////////////////////////////////////////////////////
 // addSample
-void GaWorldPressureComponent::addSample( const BcVec3d& Position, BcF32 Value )
+void GaWorldPressureComponent::addSample( const MaVec3d& Position, BcF32 Value )
 {
-	BcVec3d Offset = BcVec3d( Width_ * Scale_, Height_ * Scale_, Depth_ * Scale_ ) * 0.5f;
-	BcVec3d Index = ( Position + Offset ) / Scale_;
+	MaVec3d Offset = MaVec3d( Width_ * Scale_, Height_ * Scale_, Depth_ * Scale_ ) * 0.5f;
+	MaVec3d Index = ( Position + Offset ) / Scale_;
 	
 	BcU32 X = (BcU32)BcClamp( Index.x(), 2, Width_ - 2 );
 	BcU32 Y = (BcU32)BcClamp( Index.y(), 2, Height_ - 2 );
@@ -460,10 +460,10 @@ void GaWorldPressureComponent::addSample( const BcVec3d& Position, BcF32 Value )
 
 //////////////////////////////////////////////////////////////////////////
 // setSample
-void GaWorldPressureComponent::setSample( const BcVec3d& Position, BcF32 Value )
+void GaWorldPressureComponent::setSample( const MaVec3d& Position, BcF32 Value )
 {
-	BcVec3d Offset = BcVec3d( Width_ * Scale_, Height_ * Scale_, Depth_ * Scale_ ) * 0.5f;
-	BcVec3d Index = ( Position + Offset ) / Scale_;
+	MaVec3d Offset = MaVec3d( Width_ * Scale_, Height_ * Scale_, Depth_ * Scale_ ) * 0.5f;
+	MaVec3d Index = ( Position + Offset ) / Scale_;
 	
 	BcU32 X = (BcU32)BcClamp( Index.x(), 3, Width_ - 3 );
 	BcU32 Y = (BcU32)BcClamp( Index.y(), 3, Height_ - 3 );
@@ -572,7 +572,7 @@ void GaWorldPressureComponent::collideSimulation( BcU32 Buffer, BcBool OnlyBake 
 		{
 			for( BcU32 X = 0; X < Width_; ++X )
 			{
-				BcVec3d Position( BcVec2d( (BcF32)X, (BcF32)Y ) * Scale_ + Offset_, 4.0f );
+				MaVec3d Position( MaVec2d( (BcF32)X, (BcF32)Y ) * Scale_ + Offset_, 4.0f );
 				BcF32 DampingMultiplier = 1.0f;
 				if( BSP_->checkPointBack( Position, 0.0f ) )
 				{
@@ -601,7 +601,7 @@ void GaWorldPressureComponent::collideSimulation( BcU32 Buffer, BcBool OnlyBake 
 		{
 			for( BcU32 X = 1; X < WidthLessOne; ++X )
 			{
-				BcVec3d Position( BcVec2d( (BcF32)X, (BcF32)Y ) * Scale_ + Offset_, 4.0f );
+				MaVec3d Position( MaVec2d( (BcF32)X, (BcF32)Y ) * Scale_ + Offset_, 4.0f );
 				if( BSP_->checkPointBack( Position, 0.0f ) )
 				{
 					const BcU32 XYIdx = X + Y * W;
@@ -681,7 +681,7 @@ void GaWorldPressureComponent::updateGlowTextures()
 			{
 				for( BcU32 X = 0; X < Width_; ++X )
 				{
-					BcVec3d Position( BcVec2d( (BcF32)X, (BcF32)Y ) * Scale_ + Offset_, 4.0f );
+					MaVec3d Position( MaVec2d( (BcF32)X, (BcF32)Y ) * Scale_ + Offset_, 4.0f );
 					BcU32 Value = 255;
 					
 					//if( BSP_->checkPointFront( Position, 0.25f ) )
@@ -706,7 +706,7 @@ eEvtReturn GaWorldPressureComponent::onReset( EvtID ID, const GaWorldResetEvent&
 	BcMemZero( pBuffers_[ 0 ], sizeof( GaWorldPressureSample ) * BufferSize_ );
 	BcMemZero( pBuffers_[ 1 ], sizeof( GaWorldPressureSample ) * BufferSize_ );
 
-	setSample( BcVec3d( Event.Position_, 0.0f ), 4.0f );
+	setSample( MaVec3d( Event.Position_, 0.0f ), 4.0f );
 
 	return evtRET_PASS;
 }

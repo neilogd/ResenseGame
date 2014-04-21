@@ -51,7 +51,7 @@ public:
 	virtual void						onAttach( ScnEntityWeakRef Parent );
 	virtual void						onDetach( ScnEntityWeakRef Parent );
 
-	BcVec3d								intersection( const BcVec3d& Direction ); 
+	MaVec3d								intersection( const MaVec3d& Direction ); 
 	
 	static int							streamCallback( const void *input, void* output, unsigned long frameCount, const PaStreamCallbackTimeInfo* timeInfo, PaStreamCallbackFlags statusFlags, void* userData );
 	void								process( BcU32 Frames, BcF32* pFrames );
