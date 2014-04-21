@@ -23,7 +23,7 @@ DEFINE_RESOURCE( GaPlayerSoundComponent );
 void GaPlayerSoundComponent::StaticRegisterClass()
 {
 	ReRegisterClass< GaPlayerSoundComponent, Super >()
-		.addAttribute( new ScnComponentAttribute( 0 ) );
+		.addAttribute( new ScnComponentAttribute( 5 ) );
 }
 
 //////////////////////////////////////////////////////////////////////////
